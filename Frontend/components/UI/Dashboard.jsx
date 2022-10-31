@@ -1,8 +1,8 @@
 import React from 'react'
-import SideBar from './SideBar'
-import DashboardHeader from './DashboardHeader'
-import DashboardStyles from './Dashboard.module.css';
-import DashboardBody from './DashboardBody'
+import SideBar from '../UI/SideBar'
+import DashboardHeader from "../UI/DashboardHeader"
+import DashboardStyles from '../style/Dashboard.module.css';
+import DashboardBody from '../UI/DashboardBody'
 export default function Dashboard() {
   return (
     <div className={DashboardStyles.page}>

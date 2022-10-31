@@ -7,7 +7,7 @@ const errorHandler = require('./middleware/errorHandler')
 dot.config({ path: "./config/config.env" });
 const PORT = process.env.PORT || 5000;
 
-//db connected
+
 connection.connect((err) => {
     if (err) {
         console.log(err)
@@ -17,12 +17,14 @@ connection.connect((err) => {
 });
 
 const auth = require('./routes/auth')
+const table = require('./routes/table')
 
 const app = express();
 
 app.use(express.json());
 app.use(cors())
 app.use(auth);
+app.use(table);
 app.use(errorHandler);
 
 

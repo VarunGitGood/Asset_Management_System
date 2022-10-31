@@ -5,6 +5,7 @@ const connection = mysql.createConnection({
   user: "root",
   password: "password",
   database: "assetmanagementsystem",
+  multipleStatements: true
 });
 
 module.exports = connection;

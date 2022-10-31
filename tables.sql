@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 31, 2022 at 04:24 PM
+-- Generation Time: Nov 01, 2022 at 12:54 AM
 -- Server version: 8.0.30-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `assetmanagementsystem`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_log`
+--
+
+CREATE TABLE `activity_log` (
+  `log_id` int NOT NULL,
+  `staff_id` varchar(11) NOT NULL,
+  `asset_id` varchar(11) NOT NULL,
+  `log_date` date NOT NULL,
+  `log_description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `activity_log`
+--
+
+INSERT INTO `activity_log` (`log_id`, `staff_id`, `asset_id`, `log_date`, `log_description`) VALUES
+(4, '1', '12', '2022-11-01', 'Asset with id 12 created'),
+(5, '1', '13', '2022-11-01', 'Asset with id 13 created'),
+(6, '1', '14', '2022-11-01', 'Asset with id 14 created'),
+(7, '1', '15', '2022-11-01', 'Asset with id 15 created'),
+(8, '1', '16', '2022-11-01', 'Asset with id 16 created'),
+(9, '1', '16', '2022-11-01', 'Asset with id 16 deleted');
 
 -- --------------------------------------------------------
 
@@ -80,6 +106,12 @@ INSERT INTO `master_staff` (`staff_id`, `staff_name`, `staff_email`, `staff_pass
 --
 
 --
+-- Indexes for table `activity_log`
+--
+ALTER TABLE `activity_log`
+  ADD PRIMARY KEY (`log_id`);
+
+--
 -- Indexes for table `assets_master`
 --
 ALTER TABLE `assets_master`
@@ -103,10 +135,16 @@ ALTER TABLE `master_staff`
 --
 
 --
+-- AUTO_INCREMENT for table `activity_log`
+--
+ALTER TABLE `activity_log`
+  MODIFY `log_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `assets_master`
 --
 ALTER TABLE `assets_master`
-  MODIFY `asset_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `asset_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `master_staff`

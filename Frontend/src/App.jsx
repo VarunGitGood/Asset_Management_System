@@ -1,11 +1,10 @@
 import React from 'react'
-import Login from '../components/Login'
-
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/UI/Dashboard'
+import Login from '../components/UI/Login'
 export default function App () {
   return (
     <div> 
-        <Dashboard/>
+      <div><Login/></div>
     </div>
   )
 }

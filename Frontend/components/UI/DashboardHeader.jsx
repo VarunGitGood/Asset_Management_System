@@ -1,6 +1,6 @@
 import React from 'react'
 import { Search,AccountCircle,Settings} from '@mui/icons-material';
-import HeaderStyles from './DashboardHeader.module.css';
+import HeaderStyles from '../style/DashboardHeader.module.css';
 export default function DashboardHeader() {
   return (
     <div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import DashBoardbodyStyles from './DashboardBody.module.css';
+import DashBoardbodyStyles from '../style/DashboardBody.module.css';
 import DonutChart from './DonutChart';
 export default function DashboardBody() {
   return (

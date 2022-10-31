@@ -1,0 +1,27 @@
+CREATE TABLE `assets_master` (
+  `asset_id` int NOT NULL,
+  `model` varchar(30) NOT NULL,
+  `comp_name` varchar(50) NOT NULL,
+  `room_id` int DEFAULT NULL,
+  `asset_status` int NOT NULL,
+  `purchase_cost` int NOT NULL,
+  `purchase_date` date NOT NULL,
+  `last_updated` datetime DEFAULT NULL,
+  `last_updated_staff_id` int DEFAULT NULL,
+  `is_computer` tinyint(1) NOT NULL
+)
+
+create mock data input for assets as json
+
+{
+  "model": "model1",
+  "comp_name": "comp1",
+  "room_id": 1,
+  "asset_status": 1,
+  "purchase_cost": 100,
+  "purchase_date": "2019-01-01",
+  "last_updated": "2019-01-01 00:00:00",
+  "last_updated_staff_id": 1,
+  "is_computer": 1
+}
+

@@ -1,36 +1,53 @@
 const connection = require("../config/connection");
 const ErrorResponse = require("../utils/errorResponse");
 
+const dateConverter = () => {
+  let newDate = new Date();
+  let year = newDate.getFullYear();
+  let month = newDate.getMonth() + 1;
+  let day = newDate.getDate();
+  let convertedDate = `${year}-${month}-${day}`;
+  return convertedDate;
+};
+
+// CREATE TABLE `activity_log` (
+//   `log_id` int NOT NULL,
+//   `staff_id` varchar(11) NOT NULL,
+//   `asset_id` varchar(11) NOT NULL,
+//   `log_date` date NOT NULL,
+//   `log_description` varchar(255) NOT NULL
+// )
 
 // @GET
 // request will get all assets from master_assets
 exports.getAllAssets = async (req, res, next) => {
   try {
-    let query = "SELECT * FROM master_assets";
+    let query = "SELECT * FROM assets_master";
     connection.query(query, (err, results) => {
       if (err) {
-        next(new ErrorResponse(err.message, err.errno));
+        next(new ErrorResponse(err.message));
       }
       res.status(200).json({
         success: true,
-        message: "Assets fetched!",
+        message: "All Assets fetched!",
         data: results,
+        date: dateConverter(),
       });
     });
   } catch (error) {
     next(new ErrorResponse(error.message, 404));
   }
-}
+};
 
 // @GET
 // request will get single asset from master_assets
 exports.getSingleAsset = async (req, res, next) => {
   try {
-    let { asset_id } = req.body;
+    let asset_id = req.params.id;
     let query = "SELECT * FROM master_assets WHERE asset_id = ?";
     connection.query(query, [asset_id], async (err, result) => {
       if (err) {
-        return next(new ErrorResponse(err.message, err.errno));
+        return next(new ErrorResponse(err.message));
       }
       console.log(result);
       res.status(200).json({
@@ -42,7 +59,7 @@ exports.getSingleAsset = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 400));
   }
-}
+};
 
 // @GET
 // request will get count of all assets from master_assets
@@ -51,7 +68,7 @@ exports.getAssetCount = async (req, res, next) => {
     let query = "SELECT COUNT(*) FROM master_assets";
     connection.query(query, (err, results) => {
       if (err) {
-        next(new ErrorResponse(err.message, err.errno));
+        next(new ErrorResponse(err.message));
       }
       res.status(200).json({
         success: true,
@@ -62,49 +79,126 @@ exports.getAssetCount = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 404));
   }
-}
+};
 
 // @POST
 // request will create asset in master_assets
 exports.createAsset = async (req, res, next) => {
   try {
-    let { model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated, last_updated_staff_id, is_computer } = req.body;
-    //test forms of dates
-    let query = "INSERT INTO master_assets (model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated, last_updated_staff_id, is_computer) VALUES (?,?,?,?,?,?,?,?,?)";
-    connection.query(query, [model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated, last_updated_staff_id, is_computer], async (err, result) => {
-      if (err) {
-        return next(new ErrorResponse(err.message, err.errno));
+    let {
+      model,
+      comp_name,
+      room_id,
+      asset_status,
+      purchase_cost,
+      purchase_date,
+      last_updated,
+      last_updated_staff_id,
+      is_computer,
+    } = req.body;
+    let id;
+    let query =
+      "INSERT INTO assets_master (model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated, last_updated_staff_id, is_computer) VALUES (?,?,?,?,?,?,?,?,?)";
+    let logQuery =
+      "INSERT INTO activity_log (staff_id, asset_id, log_date, log_description) VALUES (?,?,?,?)";
+    connection.query(
+      query,
+      [
+        model,
+        comp_name,
+        room_id,
+        asset_status,
+        purchase_cost,
+        purchase_date,
+        last_updated,
+        last_updated_staff_id,
+        is_computer,
+      ],
+      async (err, result) => {
+        if (err) {
+          return next(new ErrorResponse(err.message));
+        }
+        id = result.insertId;
+        connection.query(
+          logQuery,
+          [
+            last_updated_staff_id,
+            id,
+            dateConverter(),
+            `Asset with id ${id} created`,
+          ],
+          async (err, result) => {
+            if (err) {
+              return next(new ErrorResponse(err.message));
+            }
+          }
+        );
+        res.status(200).json({
+          success: true,
+          message: "Asset created!",
+        });
       }
-      console.log(result);
-      res.status(200).json({
-        success: true,
-        message: "Asset created!",
-      });
-    });
+    );
   } catch (error) {
     next(new ErrorResponse(error.message, 400));
   }
-}
+};
 
-// @DELETE
+// DELETE
 // request will delete asset from master_assets
 exports.deleteAsset = async (req, res, next) => {
   try {
-    let { asset_id } = req.body;
-    let query = "DELETE FROM master_assets WHERE asset_id = ?";
+    const { staff_id } = req.body;
+    let asset_id = req.params.id;
+    let query = "DELETE FROM assets_master WHERE asset_id = ?";
+    let logQuery =
+      "INSERT INTO activity_log (staff_id, asset_id, log_date, log_description) VALUES (?,?,?,?)";
     connection.query(query, [asset_id], async (err, result) => {
       if (err) {
-        return next(new ErrorResponse(err.message, err.errno));
+        return next(new ErrorResponse(err.message));
       }
-      console.log(result);
+
+      connection.query(
+        logQuery,
+        [
+          staff_id,
+          asset_id,
+          dateConverter(),
+          `Asset with id ${asset_id} deleted`,
+        ],
+        async (err, result) => {
+          if (err) {
+            return next(new ErrorResponse(err.message));
+          }
+          
+        }
+      );
       res.status(200).json({
         success: true,
-        message: "Asset deleted!",
+        message: "Asset deleted!"
       });
     });
   } catch (error) {
     next(new ErrorResponse(error.message, 400));
   }
-}
+};
 
-
+// @GET
+// request will get all activity logs from activity_log
+exports.getAllLogs = async (req, res, next) => {
+  try {
+    let query = "SELECT * FROM activity_log";
+    connection.query(query, (err, results) => {
+      if (err) {
+        next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "All Logs fetched!",
+        data: results,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 404));
+  }
+};

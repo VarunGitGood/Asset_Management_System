@@ -1,0 +1,16 @@
+.page
+{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+}
+
+
+.body
+{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: auto;
+}

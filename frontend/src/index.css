@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+  }
+  html{
+    height: 100vh;
+  }
+  body
+  {
+    margin: 0%;
+    font-family: 'Inter';
+    /* z-index: 0; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  h1, h2, h3, h4, h5, h6, p {
+    
+    margin: 0;
+  
+  }
+  

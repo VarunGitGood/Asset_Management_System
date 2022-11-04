@@ -12,7 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "../style/login.css";
+
+import { useForm } from "react-hook-form";
 
 function Copyright(props) {
   return (
@@ -22,34 +23,23 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Asset Management System
-      </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
+export default function Register(props) {
+  const submitHandler = (data) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(data);
   };
+
+  const { register, handleSubmit } = useForm();
 
   return (
     <div>
-      <div class="bg"></div>
-      <div class="bg bg2"></div>
-      <div class="bg bg3"></div>
-      <div class="content">
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -65,14 +55,25 @@ export default function SignIn() {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Sign Up
               </Typography>
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(submitHandler)}
                 noValidate
                 sx={{ mt: 1 }}
               >
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="name"
+                  label="Name"
+                  name="name"
+                  autoComplete="name"
+                  autoFocus
+                  {...register("name")}
+                />
                 <TextField
                   margin="normal"
                   required
@@ -82,6 +83,20 @@ export default function SignIn() {
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  type="email"
+                  {...register("email")}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="phone"
+                  label="Phone Number"
+                  name="phone"
+                  autoComplete="phone"
+                  type="tel"
+                  autoFocus
+                  {...register("phone")}
                 />
                 <TextField
                   margin="normal"
@@ -92,6 +107,7 @@ export default function SignIn() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  {...register("password")}
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
@@ -103,19 +119,14 @@ export default function SignIn() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign In
+                  Sign Up
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="#" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
+                <Grid item>
+                  <Link  variant="body2" onClick={() => {
+                    props.onFlag()
+                  }}>
+                    {"Have an account ? Login Here"}
+                  </Link>
                 </Grid>
               </Box>
             </Box>
@@ -123,6 +134,5 @@ export default function SignIn() {
           </Container>
         </ThemeProvider>
       </div>
-    </div>
   );
 }

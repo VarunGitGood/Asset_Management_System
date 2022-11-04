@@ -12,9 +12,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { postData } from "../../utils/REST";
-
+import { postData } from "../utils/REST";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../context/authContext";
+
+
 
 function Copyright(props) {
   return (
@@ -32,11 +35,13 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn(props) {
+  const auth = useContext(AuthContext)
+  
   const submitHandler = async (data) => {
     event.preventDefault();
     try {
       const result = await postData("/auth/login", false, null, data);
-      console.log(result.data);
+      auth.login(result.data.token);
     } catch (err) {
       console.log(err.message);
     }

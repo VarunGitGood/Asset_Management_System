@@ -1,5 +1,5 @@
 const { hashPassword, checkPassword } = require("../utils/password");
-const connection = require("../config/connection");
+const connection = require("../connection");
 const ErrorResponse = require("../utils/errorResponse");
 const  sendTokenWithCookie  = require("../utils/token");
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const connection = require('./config/connection')
+const connection = require('./connection')
 const dot = require("dotenv")
 const cors = require('cors')
 const colors = require('colors')

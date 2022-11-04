@@ -1,13 +1,9 @@
-const jwt = require("jsonwebtoken");
-
-exports.sendToken = async (userid) => {
-  const token = await jwt.sign({ id: userid }, process.env.JWT_KEY, {
-    expiresIn: process.env.JWT_EXPIRES,
+const sendTokenWithCookie = async (userid, res, message) => {
+  res.status(200).json({
+    success: true,
+    message: message,
+    token: userid,
   });
-  return token;
 };
 
-exports.verifyToken = async (token) => {
-  const decoded = await jwt.verify(token, process.env.JWT_KEY)
-  return decoded.payload
-}
+module.exports = sendTokenWithCookie;

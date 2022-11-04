@@ -10,18 +10,10 @@ const dateConverter = () => {
   return convertedDate;
 };
 
-// CREATE TABLE `activity_log` (
-//   `log_id` int NOT NULL,
-//   `staff_id` varchar(11) NOT NULL,
-//   `asset_id` varchar(11) NOT NULL,
-//   `log_date` date NOT NULL,
-//   `log_description` varchar(255) NOT NULL
-// )
-
 // @GET
 // request will get all assets from master_assets
 exports.getAllAssets = async (req, res, next) => {
-  try {
+  try { 
     let query = "SELECT * FROM assets_master";
     connection.query(query, (err, results) => {
       if (err) {
@@ -44,12 +36,11 @@ exports.getAllAssets = async (req, res, next) => {
 exports.getSingleAsset = async (req, res, next) => {
   try {
     let asset_id = req.params.id;
-    let query = "SELECT * FROM master_assets WHERE asset_id = ?";
+    let query = "SELECT * FROM assets_master WHERE asset_id = ?";
     connection.query(query, [asset_id], async (err, result) => {
       if (err) {
         return next(new ErrorResponse(err.message));
       }
-      console.log(result);
       res.status(200).json({
         success: true,
         message: "Asset fetched!",
@@ -65,14 +56,14 @@ exports.getSingleAsset = async (req, res, next) => {
 // request will get count of all assets from master_assets
 exports.getAssetCount = async (req, res, next) => {
   try {
-    let query = "SELECT COUNT(*) FROM master_assets";
+    let query = "SELECT COUNT(*) FROM assets_master";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
       }
       res.status(200).json({
         success: true,
-        message: "Assets fetched!",
+        message: "Asset count fetched!",
         data: results,
       });
     });
@@ -202,3 +193,5 @@ exports.getAllLogs = async (req, res, next) => {
     next(new ErrorResponse(error.message, 404));
   }
 };
+
+

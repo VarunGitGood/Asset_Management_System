@@ -37,7 +37,9 @@ export default function SignIn(props) {
     try {
       const result = await postData("/auth/login", false, null, data);
       console.log(result.data);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const { register, handleSubmit } = useForm();

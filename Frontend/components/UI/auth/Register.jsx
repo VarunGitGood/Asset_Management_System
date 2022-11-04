@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import { postData } from "../../utils/REST";
 import { useForm } from "react-hook-form";
 
 function Copyright(props) {
@@ -31,10 +31,16 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register(props) {
-  const submitHandler = (data) => {
-    event.preventDefault();
-    console.log(data);
-  };
+    const submitHandler = async (data) => {
+        event.preventDefault();
+        console.log(data);
+        try {
+          const result = await postData("/auth/signup", false, null, data);
+          console.log(result.data);
+        } catch (err) {
+            console.log(err.message);
+        }
+      };
 
   const { register, handleSubmit } = useForm();
 

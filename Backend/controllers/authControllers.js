@@ -1,7 +1,7 @@
 const { hashPassword, checkPassword } = require("../utils/password");
 const connection = require("../config/connection");
 const ErrorResponse = require("../utils/errorResponse");
-const { sendToken } = require("../utils/token");
+const  sendTokenWithCookie  = require("../utils/token");
 
 // @POST
 // request will create user in master_login and send jsonwebtoken
@@ -11,16 +11,20 @@ exports.signIn = async (req, res, next) => {
     password = await hashPassword(password);
     let query =
       "INSERT INTO master_staff (staff_name, staff_email, staff_password, staff_phone) VALUES (?,?,?,?)";
-    connection.query(query, [name,email,password, phone], async (err, result) => {
-      if (err) {
-        return next(new ErrorResponse(err.message));
+    connection.query(
+      query,
+      [name, email, password, phone],
+      async (err, result) => {
+        if (err) {
+          return next(new ErrorResponse(err.message));
+        }
+        sendTokenWithCookie(
+          result.insertId,
+          res,
+          (message = "Sign Up successful")
+        );
       }
-      console.log(result);
-      res.status(200).json({
-        success: true,
-        message: "User created!",
-      });
-    });
+    );
   } catch (error) {
     next(new ErrorResponse(error.message));
   }
@@ -31,7 +35,7 @@ exports.signIn = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     let { email, password } = req.body;
-    console.log(email,password);
+    console.log(email, password);
     let query = "SELECT * FROM master_staff WHERE staff_email = ?";
     connection.query(query, [email], async (err, results) => {
       if (err) {
@@ -39,20 +43,15 @@ exports.login = async (req, res, next) => {
       }
       let hash = results[0].staff_password;
       let id = results[0].staff_id;
-      let isMatch = await checkPassword(password,hash);
+      let isMatch = await checkPassword(password, hash);
       if (isMatch) {
-        const token = await sendToken(id);
-        res.status(200).json({
-          success: true,
-          message: "Logged In!",
-          token,
-        });
+        sendTokenWithCookie(id, res, (message = "Login successful"));
       } else {
         next(new ErrorResponse("Invalid Credentials", 401));
       }
     });
   } catch (error) {
-    next(new ErrorResponse(error.message,400));
+    next(new ErrorResponse(error.message, 400));
   }
 };
 

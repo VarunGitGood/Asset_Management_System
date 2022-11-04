@@ -1,0 +1,17 @@
+.head
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    background: #F3F4F6;
+    width: 100%;
+    height: 54px;
+}
+
+.h
+{
+    font-size: large;
+    width: 25%;
+}
+

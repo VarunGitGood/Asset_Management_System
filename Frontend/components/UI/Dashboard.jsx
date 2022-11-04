@@ -7,11 +7,7 @@ export default function Dashboard() {
   return (
     <div className={DashboardStyles.page}>
         <SideBar/>
-        
-        <div className={DashboardStyles.body}>
-            <DashboardHeader/>
-            <DashboardBody/>
-        </div>
+        <DashboardBody/>
     </div>
   )
 }

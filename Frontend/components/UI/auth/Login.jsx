@@ -12,10 +12,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { postData } from "../utils/REST";
+import { postData } from "../../utils/REST";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../../context/authContext";
 
 
 

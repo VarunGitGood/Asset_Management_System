@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react'
-import styles from "../style/login.css"
+import styles from "../../style/login.css"
 import Login from './Login'
 import Register from './Register'
-import { useCookies } from 'react-cookie';
 import { Navigate } from 'react-router-dom';
-import Dashboard from '../UI/Dashboard';
-import { AuthContext } from '../context/authContext';
+import { AuthContext } from '../../context/authContext';
 
 
 function Landing() {

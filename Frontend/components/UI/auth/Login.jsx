@@ -43,7 +43,7 @@ export default function SignIn(props) {
       const result = await postData("/auth/login", false, null, data);
       auth.login(result.data.token);
     } catch (err) {
-      console.log(err.message);
+      window.alert("bhosdike")
     }
   };
 

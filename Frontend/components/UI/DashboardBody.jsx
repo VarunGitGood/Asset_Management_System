@@ -14,7 +14,7 @@ export default function DashboardBody() {
             <StatCard/>
         </div>
         <div className={DashBoardbodyStyles.recent}>
-            <Recent/>
+            <Recent path="logs"/>
         </div>
         <Table/>
     </div>

@@ -38,8 +38,8 @@ exports.login = async (req, res, next) => {
     console.log(email, password);
     let query = "SELECT * FROM master_staff WHERE staff_email = ?";
     connection.query(query, [email], async (err, results) => {
-      if (err) {
-        return next(new ErrorResponse(err.message));
+      if (results[0] == undefined) {
+        return next(new ErrorResponse("Invalid Credentials", 401));
       }
       let hash = results[0].staff_password;
       let id = results[0].staff_id;
@@ -47,7 +47,7 @@ exports.login = async (req, res, next) => {
       if (isMatch) {
         sendTokenWithCookie(id, res, (message = "Login successful"));
       } else {
-        next(new ErrorResponse("Invalid Credentials", 401));
+        return next(new ErrorResponse("Invalid Credentials", 401));
       }
     });
   } catch (error) {

@@ -8,6 +8,7 @@ export default function StatCard({data}) {
       nav(`/tables/${data.id}`)
     }}>
       <h2>{data.title}</h2>
+      <h3>{data.count}</h3>
     </div>
   )
 }

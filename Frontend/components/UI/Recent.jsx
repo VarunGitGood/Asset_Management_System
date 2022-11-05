@@ -9,7 +9,7 @@ export default function Recent(props) {
     try {
       const resu = await FetchData(`/${props.path}`, false, null);
       let data = resu.data.data.reverse();
-      data = data.slice(0, 10);
+      data = data.slice(0, 8);
       setLog(data);
     } catch (error) {}
   }

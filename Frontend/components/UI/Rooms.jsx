@@ -19,6 +19,7 @@ function Rooms() {
   console.log(rooms);
   const deleteRoom = async (id) => {
     try {
+      console.log(id);
       const res = await deleteData(`/rooms/${id}`);
       fetchRooms();
     } catch (error) {

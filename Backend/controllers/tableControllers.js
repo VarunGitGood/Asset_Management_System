@@ -299,3 +299,24 @@ exports.getRoomAssets = async (req, res, next) => {
     next(new ErrorResponse(error.message, 404));
   }
 }
+
+// @GET
+// get all assets which are in repair
+
+exports.getRepairAssets = async (req, res, next) => {
+  try {
+    let query = "SELECT * FROM assets_master WHERE asset_status = 0";
+    connection.query(query, (err, results) => {
+      if (err) {
+        next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "All Repair Assets fetched!",
+        data: results,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 404));
+  }
+}

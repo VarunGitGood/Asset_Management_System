@@ -1,14 +1,14 @@
 import React from 'react'
 import CardStyles from '../style/Card.module.css'
-export default function AssetCard(props) {
-    console.log(props.asst);
+export default function AssetCard({asset}) {
+    
   return (
     <div className={CardStyles.container}>
-        <h1>{props.asst.comp_name}</h1>
-        <p>Model: {props.asst.model}</p>
-        <p>Room: {props.asst.room_id}</p>
-        <p>Cost: {props.asst.purchase_cost}</p>
-        <p>Date: {props.asst.purchase_date}</p>
+        <h1>{asset.comp_name}</h1>
+        <p>Model: {asset.model}</p>
+        <p>Room: {asset.room_id}</p>
+        <p>Cost: {asset.purchase_cost}</p>
+        <p>Date: {asset.purchase_date}</p>
     </div>
   )
 }

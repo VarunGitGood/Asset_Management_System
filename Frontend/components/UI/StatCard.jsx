@@ -1,10 +1,13 @@
 import React from 'react'
 import StatCardStyles from "../style/StatCard.module.css"
-export default function StatCard(props) {
+import { useNavigate } from "react-router-dom";
+export default function StatCard({data}) {
+  const nav = useNavigate()
   return (
-    <div className={StatCardStyles.card}>
-      Stat
-      <p>title</p>
+    <div className={StatCardStyles.card} onClick={() => {
+      nav(`/tables/${data.id}`)
+    }}>
+      <h2>{data.title}</h2>
     </div>
   )
 }

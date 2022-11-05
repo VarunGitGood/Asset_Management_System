@@ -52,25 +52,6 @@ exports.getSingleAsset = async (req, res, next) => {
   }
 };
 
-// @GET
-// request will get count of all assets from master_assets
-exports.getAssetCount = async (req, res, next) => {
-  try {
-    let query = "SELECT COUNT(*) FROM assets_master";
-    connection.query(query, (err, results) => {
-      if (err) {
-        next(new ErrorResponse(err.message));
-      }
-      res.status(200).json({
-        success: true,
-        message: "Asset count fetched!",
-        data: results,
-      });
-    });
-  } catch (error) {
-    next(new ErrorResponse(error.message, 404));
-  }
-};
 
 // @POST
 // request will create asset in master_assets
@@ -262,7 +243,7 @@ exports.getAllRooms = async (req, res, next) => {
 // get all assets which are not computers
 exports.getMisc = async (req, res, next) => {
   try {
-    let query = "SELECT * FROM assets_master WHERE is_computer = 0";
+    let query = "SELECT * FROM assets_master WHERE is_computer = 0 AND asset_status = 1";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
@@ -282,7 +263,7 @@ exports.getMisc = async (req, res, next) => {
 // get all assets which are computers
 exports.getComputers = async (req, res, next) => {
   try {
-    let query = "SELECT * FROM assets_master WHERE is_computer = 1";
+    let query = "SELECT * FROM assets_master WHERE is_computer = 1 AND asset_status = 1";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
@@ -303,7 +284,7 @@ exports.getComputers = async (req, res, next) => {
 exports.getRoomAssets = async (req, res, next) => {
   try {
     let room_id = req.params.id;
-    let query = "SELECT * FROM assets_master WHERE room_id = ?";
+    let query = "SELECT * FROM assets_master WHERE room_id = ? AND asset_status = 1";
     connection.query(query, [room_id], (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));

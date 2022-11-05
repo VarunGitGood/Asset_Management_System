@@ -3,7 +3,6 @@ const router = express.Router();
 const {
   getAllAssets,
   getSingleAsset,
-  getAssetCount,
   createAsset,
   deleteAsset,
   getAllLogs,
@@ -20,7 +19,6 @@ router
   .post("/api/v1/assets", createAsset)
   .get("/api/v1/assets/:id", getSingleAsset)
   .delete("/api/v1/assets/:id", deleteAsset)
-  .get("/api/v1/count", getAssetCount)
   .get("/api/v1/logs", getAllLogs)
   .get("/api/v1/rooms", getAllRooms)
   .delete("/api/v1/rooms/:id", deleteRoom)

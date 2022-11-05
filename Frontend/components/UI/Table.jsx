@@ -14,7 +14,7 @@ export default function Table() {
             const resu = await FetchData(`/${id}`,false,null);
             setAsst(resu.data.data);
         } catch (error) {
-            
+
         }
     }
     React.useEffect(() => {
@@ -29,7 +29,7 @@ export default function Table() {
     }
     else if(id==="")
     {
-      
+    }
     tab=Asst.map((asst)=>{
         return <AssetCard key={asst._id} asst={asst} />
     })
@@ -39,4 +39,4 @@ export default function Table() {
         {tab}
     </div>
   )
-}}
+}

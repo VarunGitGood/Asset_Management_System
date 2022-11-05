@@ -1,7 +1,6 @@
 import React from 'react'
 import RecentBodyStyles from "../style/RecentBody.module.css"
 export default function RecentBody(props) {
-    console.log(props.log);
   return (
     <div>
         <div className={RecentBodyStyles.body}>

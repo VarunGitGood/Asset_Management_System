@@ -23,6 +23,12 @@ export default function AuthProvider({ children }) {
     window.localStorage.setItem("token",data)
   };
 
+  const logout = () => {
+    setToken(0);
+    setUser(null);
+    window.localStorage.removeItem("token");
+  }
+
   useEffect(() => {
     fetchUser();
   }, [token]);
@@ -30,7 +36,8 @@ export default function AuthProvider({ children }) {
   const ctx = {
     user: user,
     login,
-    loggedin: window.localStorage.getItem("token") ? true : false
+    loggedin: window.localStorage.getItem("token") ? true : false,
+    logout
   };
 
   return (

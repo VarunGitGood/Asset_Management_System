@@ -1,6 +1,5 @@
 import React from 'react'
 import SideBar from '../UI/SideBar'
-import DashboardHeader from "../UI/DashboardHeader"
 import DashboardStyles from '../style/Dashboard.module.css';
 import DashboardBody from '../UI/DashboardBody'
 export default function Dashboard() {

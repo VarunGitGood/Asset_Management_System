@@ -2,9 +2,12 @@ import React from 'react'
 import AssetCard from './AssetCard'
 import TableStyles from '../style/Table.module.css'
 import { FetchData } from '../utils/REST';
+
+
 export default function Table() {
+  
   const [Asst,setAsst]=React.useState([]);
-  var tab;
+  let tab;
     async function getAsst()
     {
         try {

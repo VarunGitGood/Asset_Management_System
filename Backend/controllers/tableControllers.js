@@ -179,6 +179,8 @@ exports.deleteAsset = async (req, res, next) => {
 exports.getAllLogs = async (req, res, next) => {
   try {
     let query = "SELECT * FROM activity_log";
+    // add to activity log
+    logQuery = "INSERT INTO activity_log (staff_id, log_date, log_description) VALUES (?,?,?)";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
@@ -194,4 +196,125 @@ exports.getAllLogs = async (req, res, next) => {
   }
 };
 
+//////////////////////////////////////////////
 
+// @POST
+// add  a new room to rooms table
+exports.addRoom = async (req, res, next) => {
+  try {
+    let { room_id } = req.body;
+    let query = "INSERT INTO rooms (room_id) VALUES (?)";
+    connection.query(query, [room_id], async (err, result) => {
+      if (err) {
+        return next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "Room added!",
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 400));
+  }
+}
+
+// @DELETE
+// delete a room from rooms table
+exports.deleteRoom = async (req, res, next) => {
+  try {
+    let room_id = req.params.id;
+    let query = "DELETE FROM rooms WHERE room_id = ?";
+    connection.query(query, [room_id], async (err, result) => {
+      if (err) {
+        return next(new ErrorResponse("Room not found",404));
+      }
+      res.status(200).json({
+        success: true,
+        message: "Room deleted!",
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 400));
+  }
+}
+
+// @GET
+// get all rooms from rooms table
+exports.getAllRooms = async (req, res, next) => {
+  try {
+    let query = "SELECT * FROM rooms";
+    connection.query(query, (err, results) => {
+      if (err) {
+        next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "All Rooms fetched!",
+        data: results,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 404));
+  }
+}
+
+// @GET
+// get all assets which are not computers
+exports.getMisc = async (req, res, next) => {
+  try {
+    let query = "SELECT * FROM assets_master WHERE is_computer = 0";
+    connection.query(query, (err, results) => {
+      if (err) {
+        next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "All Misc Assets fetched!",
+        data: results,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 404));
+  }
+}
+
+// @GET
+// get all assets which are computers
+exports.getComputers = async (req, res, next) => {
+  try {
+    let query = "SELECT * FROM assets_master WHERE is_computer = 1";
+    connection.query(query, (err, results) => {
+      if (err) {
+        next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "All Computer Assets fetched!",
+        data: results,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 404));
+  }
+}
+
+// @GET
+// get all assets which are in room id
+exports.getRoomAssets = async (req, res, next) => {
+  try {
+    let room_id = req.params.id;
+    let query = "SELECT * FROM assets_master WHERE room_id = ?";
+    connection.query(query, [room_id], (err, results) => {
+      if (err) {
+        next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "All Assets fetched!",
+        data: results,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 404));
+  }
+}

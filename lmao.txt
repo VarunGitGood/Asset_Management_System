@@ -25,3 +25,17 @@ create mock data input for assets as json
   "is_computer": 1
 }
 
+
+
+CREATE TABLE `rooms` (
+  `room_id` int NOT NULL,
+  
+)
+
+//create multiple input for rooms
+
+// insert multiple till 10
+INSERT INTO `rooms`(`room_id`) VALUES ('1'),('2'),('3'),('4'),('5'),('6'),('7'),('8'),('9'),('10')
+
+
+asset add karte waqt jitne options hai rooms ke wahi dena bas

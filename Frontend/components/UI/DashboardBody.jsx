@@ -3,6 +3,7 @@ import DashBoardbodyStyles from "../style/DashboardBody.module.css";
 import Recent from "./Recent";
 import StatCard from "./StatCard";
 import { FetchData } from "../utils/REST";
+import StatPage from "./StatPage";
 export default function DashboardBody() {
   const [count, setCount] = React.useState({
     assets: 0,
@@ -41,11 +42,15 @@ export default function DashboardBody() {
   return (
     <div className={DashBoardbodyStyles.container}>
       <h1>Dashboard</h1>
-      <div className={DashBoardbodyStyles.statCards}>
-        {data.map((i) => {
-          return <StatCard data={i} key={i} />;
-        })}
+      <div className={DashBoardbodyStyles.control}>
+        <div className={DashBoardbodyStyles.statCards}>
+          {data.map((i) => {
+            return <StatCard data={i} key={i} />;
+          })}
+        </div>
+        <StatPage />
       </div>
+
       <div className={DashBoardbodyStyles.recent}>
         <Recent path="logs" />
       </div>

@@ -3,6 +3,7 @@ import DashBoardbodyStyles from '../style/DashboardBody.module.css';
 import Recent from './Recent';
 import StatCard from './StatCard';
 import DonutChart from './DonutChart';
+import Table from './Table';
 export default function DashboardBody() {
   return (
     <div className={DashBoardbodyStyles.container}>
@@ -15,7 +16,7 @@ export default function DashboardBody() {
         <div className={DashBoardbodyStyles.recent}>
             <Recent path="logs"/>
         </div>
-        {/* <DonutChart/> */}
+        <Table/>
     </div>
   )
 }

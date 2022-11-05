@@ -18,6 +18,8 @@ export default function AuthProvider({ children }) {
     }
   };
 
+
+
   const login = async (data) => {
     setToken(data);
     window.localStorage.setItem("token",data)
@@ -38,6 +40,7 @@ export default function AuthProvider({ children }) {
     login,
     loggedin: window.localStorage.getItem("token") ? true : false,
     logout
+
   };
 
   return (

@@ -1,0 +1,25 @@
+.main {
+    width: 85%;
+}
+
+.layout {
+    display: flex;
+    flex-direction: row;
+
+    margin: 0 auto;
+    width: 100%;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}

@@ -20,7 +20,10 @@ export default function SideBar() {
           nav('/profile')
         }
         }>Profile</div>
-        <div className={SideBarStyles.card}>Rooms</div>
+        <div className={SideBarStyles.card} onClick={() => {
+          nav('/rooms')
+        }
+        }>Rooms</div>
         <div></div>
         <Logout />
       </div>

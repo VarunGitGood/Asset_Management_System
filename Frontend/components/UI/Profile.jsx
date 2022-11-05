@@ -5,7 +5,6 @@ function Profile() {
   return (
     <div className={s.main}>
       <SideBar />
-
       <div>
         <img src='../../components/assets/back.jpg' alt='lamo'/>
       </div>

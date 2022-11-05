@@ -11,4 +11,20 @@ h1
     color: #333;
     margin: 0;
     padding: 20px;
+    cursor: pointer;
+}
+
+.statCards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+    width: 60%;
+    margin: 0 0 1rem 1rem;
+}
+
+.control {
+    display: flex;
+    flex-direction: row;
 }

@@ -4,12 +4,10 @@ import s from "../style/Rooms.module.css";
 import { Button } from "@material-ui/core";
 import { useEffect } from "react";
 import { FetchData, postData, deleteData } from "../utils/REST";
-import StatCard from "./StatCard";
 import RoomCard from "./RoomCard";
 
 function Rooms() {
   const [rooms, setRooms] = React.useState([]);
-
   const fetchRooms = async () => {
     try {
       const res = await FetchData("/rooms");
@@ -21,6 +19,7 @@ function Rooms() {
   console.log(rooms);
   const deleteRoom = async (id) => {
     try {
+      console.log(id);
       const res = await deleteData(`/rooms/${id}`);
       fetchRooms();
     } catch (error) {
@@ -56,7 +55,7 @@ function Rooms() {
         </div>
         <div className={s.cards}>
             {(rooms.map((room) => {
-            return <RoomCard data={room} key={room.room_id}  deleteRoom={deleteRoom}/>;
+            return <RoomCard data={room} key={room.room_id} deleteRoom={deleteRoom}/>;
           }))}
           
         </div>

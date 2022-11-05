@@ -39,3 +39,14 @@ INSERT INTO `rooms`(`room_id`) VALUES ('1'),('2'),('3'),('4'),('5'),('6'),('7'),
 
 
 asset add karte waqt jitne options hai rooms ke wahi dena bas
+
+
+// create repairs TABLE
+
+CREATE TABLE `repairs` (
+  `repair_id` int NOT NULL,
+  `asset_id` int NOT NULL,
+  `repair_date` date NOT NULL,
+  `repair_cost` int NOT NULL,
+  `repair_staff_id` int NOT NULL
+)

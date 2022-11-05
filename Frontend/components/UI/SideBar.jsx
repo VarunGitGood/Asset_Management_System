@@ -24,7 +24,6 @@ export default function SideBar() {
           nav('/rooms')
         }
         }>Rooms</div>
-        <div></div>
         <Logout />
       </div>
     </>

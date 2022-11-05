@@ -8,7 +8,8 @@ export default function Recent(props) {
   async function getRecent() {
     try {
       const resu = await FetchData(`/${props.path}`, false, null);
-      const data = resu.data.data.reverse();
+      let data = resu.data.data.reverse();
+      data = data.slice(0, 8);
       setLog(data);
     } catch (error) {}
   }

@@ -6,16 +6,20 @@ import { FetchData } from "../utils/REST";
 import SideBar from "./SideBar";
 
 export default function Table() {
-  const params=useParams();
-  const id=params.id;
-  const [Asst,setAsst]=React.useState([]);
-  var tab;
-    async function getAsst()
-    {
-        try {
-            const resu = await FetchData(`/${id}`,false,null);
-            setAsst(resu.data.data);
-        } catch (error) {
+  const { id } = useParams();
+  const [Asst, setAsst] = React.useState([]);
+
+  async function getAsst() {
+    try {
+      const resu = await FetchData(`/${id}`);
+      console.log(resu.data.data);
+      setAsst(resu.data.data);
+    } catch (error) {}
+  }
+  React.useEffect(() => {
+    getAsst();
+  }, []);
+
 
         }
     }
@@ -39,7 +43,11 @@ export default function Table() {
   return (
     <div className={TableStyles.layout}>
       <SideBar />
-      <div className={TableStyles.container}>{tab}</div>
+      <div className={TableStyles.container}>
+        {Asst.map((asst) => {
+          return <AssetCard key={asst.asset_id} asset={asst} />;
+        })}
+      </div>
     </div>
-  )
+  );
 }

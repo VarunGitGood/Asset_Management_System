@@ -1,0 +1,17 @@
+.main {
+    width: 85%;
+}
+
+.layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.control {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

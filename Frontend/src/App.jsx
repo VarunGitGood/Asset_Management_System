@@ -7,7 +7,7 @@ import Profile from "../components/UI/Profile";
 import Rooms from "../components/UI/Rooms";
 import Table from "../components/UI/Table";
 import RoomTable from "../components/UI/RoomTable";
-
+import Repairs from "../components/UI/Repairs";
 
 export default function App() {
   return (
@@ -18,6 +18,7 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/rooms" element={<Rooms />} />
+            <Route path="/repairs" element={<Repairs />} />
             <Route path="/rooms/:id" element={<RoomTable />} />
             <Route path="/tables/:id" element={<Table />} />
           </Routes>

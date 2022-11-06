@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [token, setToken] = useState(0);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const fetchUser = async () => {
     try {
       const body = {
@@ -39,7 +39,8 @@ export default function AuthProvider({ children }) {
     user: user,
     login,
     loggedin: window.localStorage.getItem("token") ? true : false,
-    logout
+    logout,
+    fetchUser
 
   };
 

@@ -66,11 +66,12 @@ exports.createAsset = async (req, res, next) => {
       purchase_date,
       last_updated,
       last_updated_staff_id,
-      is_computer,
+      is_computer
     } = req.body;
+    console.log(req.body);
     let id;
     let query =
-      "INSERT INTO assets_master (model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated, last_updated_staff_id, is_computer) VALUES (?,?,?,?,?,?,?,?,?)";
+      "INSERT INTO assets_master (model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated_staff_id, is_computer) VALUES (?,?,?,?,?,?,?,?)";
     let logQuery =
       "INSERT INTO activity_log (staff_id, asset_id, log_date, log_description) VALUES (?,?,?,?)";
     connection.query(
@@ -88,7 +89,8 @@ exports.createAsset = async (req, res, next) => {
       ],
       async (err, result) => {
         if (err) {
-          return next(new ErrorResponse(err.message));
+          console.log(err);
+          return next(new ErrorResponse(err.message,401));
         }
         id = result.insertId;
         connection.query(
@@ -101,7 +103,7 @@ exports.createAsset = async (req, res, next) => {
           ],
           async (err, result) => {
             if (err) {
-              return next(new ErrorResponse(err.message));
+              return next(new ErrorResponse("bcc1",402));
             }
           }
         );
@@ -112,7 +114,7 @@ exports.createAsset = async (req, res, next) => {
       }
     );
   } catch (error) {
-    next(new ErrorResponse(error.message, 400));
+    next(new ErrorResponse("bc3", 403));
   }
 };
 

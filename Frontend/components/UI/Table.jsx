@@ -33,7 +33,7 @@ export default function Table() {
     {
     }
     tab=Asst.map((asst)=>{
-        return <AssetCard key={asst._id} asst={asst} />
+        return <AssetCard key={asst._id} asset={asst} />
     })
     console.log(Asst);
   return (

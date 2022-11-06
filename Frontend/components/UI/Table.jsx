@@ -21,21 +21,8 @@ export default function Table() {
   }, []);
 
 
-        }
-    }
-    React.useEffect(() => {
-        getAsst();
-    }, [])
     
-    if(id==="assets")
-    {
-        tab=Asst.map((asst)=>{
-            return <AssetCard key={asst._id} asst={asst} />
-        })
-    }
-    else if(id==="")
-    {
-    }
+    
     tab=Asst.map((asst)=>{
         return <AssetCard key={asst._id} asset={asst} />
     })

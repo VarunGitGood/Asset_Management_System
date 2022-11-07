@@ -4,6 +4,7 @@ import Recent from "./Recent";
 import StatCard from "./StatCard";
 import { FetchData } from "../utils/REST";
 import StatPage from "./StatPage";
+import ChartCard from "./ChartCard";
 export default function DashboardBody() {
   const [count, setCount] = React.useState({
     assets: 0,
@@ -48,7 +49,7 @@ export default function DashboardBody() {
             return <StatCard data={i} key={i} />;
           })}
         </div>
-        <StatPage />
+        <ChartCard />
       </div>
 
       <div className={DashBoardbodyStyles.recent}>

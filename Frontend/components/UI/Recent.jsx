@@ -17,12 +17,12 @@ export default function Recent(props) {
     getRecent();
   }, []);
   return (
-    <div>
+    <div className={RecentStyles.reccontain}>
       <div className={RecentStyles.head}>
         <div className={RecentStyles.h}>Staff_Name</div>
         <div className={RecentStyles.h}>Asset_Id</div>
         <div className={RecentStyles.h}>Date</div>
-        <div className={RecentStyles.h}>Desc</div>
+        <div className={RecentStyles.h}>Description</div>
       </div>
       {Log.map((log) => {
         return <RecentBody key={log._id} log={log} />;

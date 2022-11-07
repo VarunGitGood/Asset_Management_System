@@ -14,13 +14,21 @@ export default function Table() {
       const resu = await FetchData(`/${id}`);
       console.log(resu.data.data);
       setAsst(resu.data.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
   React.useEffect(() => {
     getAsst();
   }, []);
 
 
+    let tab;
+    
+    tab=Asst.map((asst)=>{
+        return <AssetCard key={asst._id} asset={asst} />
+    })
+    console.log(Asst);
   return (
     <div className={TableStyles.layout}>
       <SideBar />

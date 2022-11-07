@@ -40,7 +40,8 @@ export default function AuthProvider({ children }) {
     login,
     loggedin: window.localStorage.getItem("token") ? true : false,
     logout,
-    fetchUser
+    fetchUser,
+    token
 
   };
 

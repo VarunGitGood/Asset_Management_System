@@ -13,7 +13,7 @@ const dateConverter = () => {
 // @GET
 // request will get all assets from master_assets
 exports.getAllAssets = async (req, res, next) => {
-  try { 
+  try {
     let query = "SELECT * FROM assets_master";
     connection.query(query, (err, results) => {
       if (err) {
@@ -52,7 +52,6 @@ exports.getSingleAsset = async (req, res, next) => {
   }
 };
 
-
 // @POST
 // request will create asset in master_assets
 exports.createAsset = async (req, res, next) => {
@@ -64,14 +63,14 @@ exports.createAsset = async (req, res, next) => {
       asset_status,
       purchase_cost,
       purchase_date,
-      last_updated,
       last_updated_staff_id,
-      is_computer
+      is_computer,
+      count
     } = req.body;
     console.log(req.body);
     let id;
     let query =
-      "INSERT INTO assets_master (model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated_staff_id, is_computer) VALUES (?,?,?,?,?,?,?,?)";
+      "INSERT INTO assets_master (model, comp_name, room_id, asset_status, purchase_cost, purchase_date, last_updated_staff_id, is_computer,count) VALUES (?,?,?,?,?,?,?,?,?)";
     let logQuery =
       "INSERT INTO activity_log (staff_id, asset_id, log_date, log_description) VALUES (?,?,?,?)";
     connection.query(
@@ -83,14 +82,14 @@ exports.createAsset = async (req, res, next) => {
         asset_status,
         purchase_cost,
         purchase_date,
-        last_updated,
         last_updated_staff_id,
         is_computer,
+        count
       ],
       async (err, result) => {
         if (err) {
           console.log(err);
-          return next(new ErrorResponse(err.message,401));
+          return next(new ErrorResponse(err.message, 401));
         }
         id = result.insertId;
         connection.query(
@@ -103,7 +102,7 @@ exports.createAsset = async (req, res, next) => {
           ],
           async (err, result) => {
             if (err) {
-              return next(new ErrorResponse("bcc1",402));
+              return next(new ErrorResponse("bcc1", 402));
             }
           }
         );
@@ -118,20 +117,20 @@ exports.createAsset = async (req, res, next) => {
   }
 };
 
-// DELETE
+// @POST
 // request will delete asset from master_assets
 exports.deleteAsset = async (req, res, next) => {
   try {
     const { staff_id } = req.body;
     let asset_id = req.params.id;
     let query = "DELETE FROM assets_master WHERE asset_id = ?";
+    console.log(staff_id, asset_id);
     let logQuery =
       "INSERT INTO activity_log (staff_id, asset_id, log_date, log_description) VALUES (?,?,?,?)";
     connection.query(query, [asset_id], async (err, result) => {
       if (err) {
         return next(new ErrorResponse(err.message));
       }
-
       connection.query(
         logQuery,
         [
@@ -144,12 +143,11 @@ exports.deleteAsset = async (req, res, next) => {
           if (err) {
             return next(new ErrorResponse(err.message));
           }
-          
         }
       );
       res.status(200).json({
         success: true,
-        message: "Asset deleted!"
+        message: "Asset deleted!",
       });
     });
   } catch (error) {
@@ -163,7 +161,8 @@ exports.getAllLogs = async (req, res, next) => {
   try {
     let query = "SELECT * FROM activity_log";
     // add to activity log
-    logQuery = "INSERT INTO activity_log (staff_id, log_date, log_description) VALUES (?,?,?)";
+    logQuery =
+      "INSERT INTO activity_log (staff_id, log_date, log_description) VALUES (?,?,?)";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
@@ -197,7 +196,7 @@ exports.addRoom = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 400));
   }
-}
+};
 
 // @DELETE
 // delete a room from rooms table
@@ -207,7 +206,7 @@ exports.deleteRoom = async (req, res, next) => {
     let query = "DELETE FROM rooms WHERE room_id = ?";
     connection.query(query, [room_id], async (err, result) => {
       if (err) {
-        return next(new ErrorResponse("Room not found",404));
+        return next(new ErrorResponse("Room not found", 404));
       }
       res.status(200).json({
         success: true,
@@ -217,7 +216,7 @@ exports.deleteRoom = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 400));
   }
-}
+};
 
 // @GET
 // get all rooms from rooms table
@@ -237,13 +236,14 @@ exports.getAllRooms = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 404));
   }
-}
+};
 
 // @GET
 // get all assets which are not computers
 exports.getMisc = async (req, res, next) => {
   try {
-    let query = "SELECT * FROM assets_master WHERE is_computer = 0 AND asset_status = 1";
+    let query =
+      "SELECT * FROM assets_master WHERE is_computer = 0 AND asset_status = 1";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
@@ -257,13 +257,14 @@ exports.getMisc = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 404));
   }
-}
+};
 
 // @GET
 // get all assets which are computers
 exports.getComputers = async (req, res, next) => {
   try {
-    let query = "SELECT * FROM assets_master WHERE is_computer = 1 AND asset_status = 1";
+    let query =
+      "SELECT * FROM assets_master WHERE is_computer = 1 AND asset_status = 1";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
@@ -277,14 +278,15 @@ exports.getComputers = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 404));
   }
-}
+};
 
 // @GET
 // get all assets which are in room id
 exports.getRoomAssets = async (req, res, next) => {
   try {
     let room_id = req.params.id;
-    let query = "SELECT * FROM assets_master WHERE room_id = ? AND asset_status = 1";
+    let query =
+      "SELECT * FROM assets_master WHERE room_id = ? AND asset_status = 1";
     connection.query(query, [room_id], (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));
@@ -298,7 +300,7 @@ exports.getRoomAssets = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 404));
   }
-}
+};
 
 // @GET
 // get all assets which are in repair
@@ -319,7 +321,7 @@ exports.getRepairAssets = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 404));
   }
-}
+};
 
 // @POST
 // send item for repair using id
@@ -340,7 +342,75 @@ exports.sendRepair = async (req, res, next) => {
   } catch (error) {
     next(new ErrorResponse(error.message, 400));
   }
+};
+
+// @PUT
+// update item after repair using id
+
+exports.updateRepair = async (req, res, next) => {
+  try {
+    let asset_id = req.params.id;
+    let query = "UPDATE assets_master SET asset_status = 1 WHERE asset_id = ?";
+    connection.query(query, [asset_id], async (err, result) => {
+      if (err) {
+        return next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "Asset updated!",
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 400));
+  }
+};
+
+// @POST
+// increase count by amount in body of asset using id
+
+exports.increaseCount = async (req, res, next) => {
+  try {
+    let { asset_id, amount } = req.body;
+    let query = "UPDATE assets_master SET count = count + ? WHERE asset_id = ?";
+    connection.query(query, [amount, asset_id], async (err, result) => {
+      if (err) {
+        return next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "Asset count increased!",
+        result,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 400));
+  }
+};
+
+
+// @POST
+// decrease count by amount in body of asset using id
+
+exports.decreaseCount = async (req, res, next) => {
+  try {
+    let asset_id = req.params.id;
+    let { count,amount } = req.body;
+    console.log(asset_id, amount);
+    if(amount > count) {
+      return next(new ErrorResponse("Amount cannot be greater than count", 400));
+    }
+    let query = "UPDATE assets_master SET count = count - ? WHERE asset_id = ?";
+    connection.query(query, [amount, asset_id], async (err, result) => {
+      if (err) {
+        return next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "Asset count decreased!",
+        result,
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 400));
+  }
 }
-
-
-

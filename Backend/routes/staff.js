@@ -4,7 +4,7 @@ const routes = express.Router();
 
 
 const {
-    getAllStaff,getStaffById
+    getAllStaff,getStaffById,getStaffActivity
 } = require('../controllers/staffControllers');
 
 routes.route('/api/v1/staff').get(getAllStaff)

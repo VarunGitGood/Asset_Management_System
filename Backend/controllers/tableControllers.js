@@ -179,8 +179,6 @@ exports.getAllLogs = async (req, res, next) => {
   }
 };
 
-//////////////////////////////////////////////
-
 // @POST
 // add  a new room to rooms table
 exports.addRoom = async (req, res, next) => {
@@ -322,3 +320,27 @@ exports.getRepairAssets = async (req, res, next) => {
     next(new ErrorResponse(error.message, 404));
   }
 }
+
+// @POST
+// send item for repair using id
+
+exports.sendRepair = async (req, res, next) => {
+  try {
+    let { asset_id } = req.body;
+    let query = "UPDATE assets_master SET asset_status = 0 WHERE asset_id = ?";
+    connection.query(query, [asset_id], async (err, result) => {
+      if (err) {
+        return next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "Asset sent for repair!",
+      });
+    });
+  } catch (error) {
+    next(new ErrorResponse(error.message, 400));
+  }
+}
+
+
+

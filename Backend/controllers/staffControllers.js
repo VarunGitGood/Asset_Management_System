@@ -20,6 +20,7 @@ exports.getAllStaff = async (req, res, next) => {
     }
 }
 
+// @GET
 // get staff by id
 exports.getStaffById = async (req, res, next) => {
     try {
@@ -38,3 +39,28 @@ exports.getStaffById = async (req, res, next) => {
         next(new ErrorResponse(error.message));
     }
 }
+
+// @GET
+// gets all activity performed by staff with given staff id using join
+
+exports.getStaffActivity = async (req, res, next) => {
+    try {
+        const {id} = req.body;
+        let query = "SELECT * FROM master_staff INNER JOIN activity ON master_staff.staff_id = activity.staff_id WHERE master_staff.staff_id = ?";
+        connection.query(query, [id], (err, results) => {
+        if (err) {
+            return next(new ErrorResponse(err.message));
+        }
+        res.status(200).json({
+            success: true,
+            data: results,
+        });
+        });
+    } catch (error) {
+        next(new ErrorResponse(error.message));
+    }
+}
+
+
+
+

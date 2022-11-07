@@ -12,7 +12,8 @@ const {
   getRoomAssets,
   getMisc,
   getComputers,
-  getRepairAssets
+  getRepairAssets,
+  sendRepair,
 } = require("../controllers/tableControllers");
 
 router
@@ -27,6 +28,7 @@ router
   .get("/api/v1/rooms/:id", getRoomAssets)
   .get("/api/v1/misc", getMisc)
   .get("/api/v1/computers", getComputers)
-  .get("/api/v1/repassets", getRepairAssets);
+  .get("/api/v1/repassets", getRepairAssets)
+  .put("/api/v1/repassets", sendRepair);
 
 module.exports = router;

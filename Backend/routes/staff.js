@@ -9,7 +9,6 @@ const {
 
 routes.route('/api/v1/staff').get(getAllStaff)
 routes.route('/api/v1/staffid').post(getStaffById)
-
-
+routes.route('/api/v1/staffactivity').post(getStaffActivity);
 
 module.exports = routes

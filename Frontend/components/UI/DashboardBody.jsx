@@ -3,7 +3,6 @@ import DashBoardbodyStyles from "../style/DashboardBody.module.css";
 import Recent from "./Recent";
 import StatCard from "./StatCard";
 import { FetchData } from "../utils/REST";
-import StatPage from "./StatPage";
 import ChartCard from "./ChartCard";
 export default function DashboardBody() {
   const [count, setCount] = React.useState({
@@ -36,6 +35,21 @@ export default function DashboardBody() {
     }
   };
 
+  const chartData = [
+    {
+      label: "Miscellaneous",
+      value: count.misc,
+    },
+    {
+      label: "Computers",
+      value: count.computers,
+    },
+    {
+      label: "Repairs",
+      value: count.repassets,
+    }
+  ]
+
   useEffect(() => {
     fetch();
   }, []);
@@ -49,7 +63,7 @@ export default function DashboardBody() {
             return <StatCard data={i} key={i} />;
           })}
         </div>
-        <ChartCard />
+        <ChartCard chartData={chartData}/>
       </div>
 
       <div className={DashBoardbodyStyles.recent}>

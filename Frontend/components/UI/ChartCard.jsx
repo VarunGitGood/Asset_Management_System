@@ -2,7 +2,7 @@ import React from "react";
 import ChartStyles from "../style/ChartCard.module.css";
 import DonutChart from "react-donut-chart";
 
-export default function ChartCard() {
+export default function ChartCard({chartData}) {
   return (
     <div className={ChartStyles.card}>
       <DonutChart
@@ -15,16 +15,16 @@ export default function ChartCard() {
         colors={["#fdcc0a", "#eb5756", "#6acf95", "#0d57b2", "#c6c6c6"]}
         data={[
           {
-            label: "Miscellaneous",
-            value: 20,
+            label: chartData[0].label,
+            value: chartData[0].value,
           },
           {
-            label: "Computers",
-            value: 30,
+            label: chartData[1].label,
+            value: chartData[1].value,
           },
           {
-            label: "Repairs",
-            value: 50,
+            label: chartData[2].label,
+            value: chartData[2].value,
           },
         ]}
       />

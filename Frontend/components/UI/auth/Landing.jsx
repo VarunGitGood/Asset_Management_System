@@ -18,7 +18,7 @@ function Landing() {
       <div className="bg bg3"></div>
       <div className="bg bg2"></div>
       <div className="content">
-        {auth.loggedin ? (<Navigate to="/dashboard" replace/>) : (flag ? <Login onFlag={flagHandler}/> : <Register onFlag={flagHandler}/>)}
+        {auth.user ? (<Navigate to="/dashboard" replace/>) : (flag ? <Login onFlag={flagHandler}/> : <Register onFlag={flagHandler}/>)}
         
       </div>
     </div>

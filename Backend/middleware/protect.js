@@ -19,7 +19,7 @@ exports.protect = async (req, res, next) => {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, "lmaodasd");
+    const decoded = jwt.verify(token, "dast");
     // set user in header
     let query = `SELECT * FROM master_staff WHERE staff_id = ?`;
     req.user = connection.query(

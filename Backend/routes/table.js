@@ -16,25 +16,27 @@ const {
   sendRepair,
   updateRepair,
   increaseCount,
-  decreaseCount
+  decreaseCount,
 } = require("../controllers/tableControllers");
 
+const { protect } = require("../middleware/protect");
+
 router
-  .get("/api/v1/assets", getAllAssets)
-  .post("/api/v1/assets", createAsset)
-  .get("/api/v1/assets/:id", getSingleAsset)
-  .post("/api/v1/assets/:id", deleteAsset)
-  .get("/api/v1/logs", getAllLogs)
-  .get("/api/v1/rooms", getAllRooms)
-  .delete("/api/v1/rooms/:id", deleteRoom)
-  .post("/api/v1/rooms", addRoom)
-  .get("/api/v1/rooms/:id", getRoomAssets)
-  .get("/api/v1/misc", getMisc)
-  .get("/api/v1/computers", getComputers)
-  .get("/api/v1/repassets", getRepairAssets)
-  .put("/api/v1/repassets", sendRepair)
-  .put("/api/v1/update/:id", updateRepair)
-  .post("/api/v1/inc/:id", increaseCount)
-  .post("/api/v1/dec/:id", decreaseCount);
+  .get("/api/v1/assets", protect, getAllAssets)
+  .post("/api/v1/assets", protect, createAsset)
+  .get("/api/v1/assets/:id", protect, getSingleAsset)
+  .post("/api/v1/assets/:id", protect, deleteAsset)
+  .get("/api/v1/logs", protect, getAllLogs)
+  .get("/api/v1/rooms", protect, getAllRooms)
+  .delete("/api/v1/rooms/:id", protect, deleteRoom)
+  .post("/api/v1/rooms", protect, addRoom)
+  .get("/api/v1/rooms/:id", protect, getRoomAssets)
+  .get("/api/v1/misc", protect, getMisc)
+  .get("/api/v1/computers", protect, getComputers)
+  .get("/api/v1/repassets", protect, getRepairAssets)
+  .put("/api/v1/repassets", protect, sendRepair)
+  .put("/api/v1/update/:id", protect, updateRepair)
+  .post("/api/v1/inc/:id", protect, increaseCount)
+  .post("/api/v1/dec/:id", protect, decreaseCount);
 
 module.exports = router;

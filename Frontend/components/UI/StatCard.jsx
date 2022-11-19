@@ -11,16 +11,16 @@ export default function StatCard({ data }) {
   var icon;
   switch (data.id) {
     case "assets":
-      icon = <FontAwesomeIcon icon={faWarehouse} />;
+      icon = <FontAwesomeIcon icon={faWarehouse} size="2x" />;
       break;
     case "misc":
-      icon = <FontAwesomeIcon icon={faBars} />;
+      icon = <FontAwesomeIcon icon={faBars} size="2x"/>;
       break;
     case "computers":
-      icon = <FontAwesomeIcon icon={faDesktop} />;
+      icon = <FontAwesomeIcon icon={faDesktop} size="2x"/>;
       break;
     case "repassets":
-      icon = <FontAwesomeIcon icon={faTools} />;
+      icon = <FontAwesomeIcon icon={faTools} size="2x"/>;
       break;
     default:
       break;
@@ -33,9 +33,13 @@ export default function StatCard({ data }) {
         nav(`/tables/${data.id}`);
       }}
     >
-      <div className="icon">{icon}</div>
-      <h3>{data.title}</h3>
-      <h1>{data.count}</h1>
+        <div className={StatCardStyles.icon}>{icon}</div>
+        <div className={StatCardStyles.text}>
+          <h2>{data.title}</h2>
+          <h1>{data.count}</h1>
+        </div>
+
+
     </div>
   );
 }

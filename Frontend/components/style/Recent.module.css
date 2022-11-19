@@ -16,6 +16,14 @@
     color: white;
 }
 
+.de
+{
+    font-size: large;
+    width: 50%;
+    padding: 5px;
+    color: white;
+}
+
 .reccontain
 {
     display: flex;

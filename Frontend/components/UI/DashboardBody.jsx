@@ -56,7 +56,6 @@ export default function DashboardBody() {
 
   return (
     <div className={DashBoardbodyStyles.container}>
-      <h1>Dashboard</h1>
       <div className={DashBoardbodyStyles.control}>
         <div className={DashBoardbodyStyles.statCards}>
           {data.map((i) => {

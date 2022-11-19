@@ -7,8 +7,9 @@ function Profile() {
   return (
     <div className={s.main}>
       <SideBar />
-      <AssetForm />
-      <RepairForm />
+      {/* <AssetForm />
+      <RepairForm /> */}
+      
     </div>
   );
 }

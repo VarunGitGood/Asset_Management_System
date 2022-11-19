@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import CardStyles from "../style/Card.module.css";
 import { postData } from "../utils/REST";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+
 export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
   const [value, setvalue] = useState(asset.count);
   let count = asset.count;
@@ -34,28 +38,33 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
   return (
     <div className={CardStyles.card}>
       <div className={CardStyles.control}>
-        <button
-          onClick={() => {
-            onRepair(asset.asset_id);
-          }}
-        >
-          Send For repair
-        </button>
-        <button
-          onClick={() => {
-            onDelete(asset.asset_id);
-          }}
-        >
-          Delete
-        </button>
+        <div className={CardStyles.title}>{asset.comp_name}</div>
+        <div className={CardStyles.bb}>
+          <button
+            onClick={() => {
+              onRepair(asset.asset_id);
+            }}
+          >
+            <FontAwesomeIcon icon={faUpRightFromSquare} />
+          </button>
+          <button
+            onClick={() => {
+              onDelete(asset.asset_id);
+            }}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
+        
       </div>
       <div className={CardStyles.data}>
-        <h1>{asset.comp_name}</h1>
+        
+
         <p>Asset ID: {asset.asset_id}</p>
         <p>Model: {asset.model}</p>
         <p>Room: {asset.room_id}</p>
         <p>Cost: {asset.purchase_cost}</p>
-        <p>Date: {asset.purchase_date}</p>
+        <p>Date: {asset.purchase_date.slice(0,10)}</p>
       </div>
       <div>
         Count: {count}

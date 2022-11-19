@@ -4,15 +4,17 @@
   html{
     height: 100vh;
     width: 100vw;
+    
   }
   body
   {
     margin: 0%;
-    font-family: 'Inter';
+    font-family: 'Poppins', sans-serif;
     /* z-index: 0; */
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-color: #F6F5FB;;
   }
   h1, h2, h3, h4, h5, h6, p {
     

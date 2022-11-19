@@ -1,5 +1,6 @@
 const connection = require("../connection");
 const ErrorResponse = require("../utils/errorResponse");
+const jwt = require("jsonwebtoken");
 
 // @GET
 // request will get all staff
@@ -24,9 +25,11 @@ exports.getAllStaff = async (req, res, next) => {
 // get staff by id
 exports.getStaffById = async (req, res, next) => {
     try {
-        const {id} = req.body;
+        const {token} = req.body;
+        const decoded = jwt.verify(token, "dast");
+        console.log(decoded.id);
         let query = "SELECT * FROM master_staff WHERE staff_id = ?";
-        connection.query(query, [id], (err, results) => {
+        connection.query(query, [decoded.id], (err, results) => {
         if (err) {
             return next(new ErrorResponse(err.message));
         }

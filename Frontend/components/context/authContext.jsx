@@ -4,33 +4,36 @@ import { FetchData, postData } from "../utils/REST";
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const [token, setToken] = useState(0);
-  const [user, setUser] = useState([]);
+
+  const [token, setToken] = useState("");
+
+  const [user, setUser] = useState(null);
+
   const fetchUser = async () => {
     try {
+      let id  = await window.localStorage.getItem('token') || token;
       const body = {
-        id: token,
+        token: id
       };
-      const resu = await postData("/staffid", false, null, body);
+      console.log(id);
+      const resu = await postData("/staffid", true, id, body);
       setUser(resu.data);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
-
-
   const login = async (data) => {
-    setToken(data);
     window.localStorage.setItem("token",data)
+    setToken(data);
   };
 
   const logout = () => {
-    setToken(0);
-    setUser(null);
     window.localStorage.removeItem("token");
+    setToken("");
+    setUser(null);
   }
-
+  console.log(user);
   useEffect(() => {
     fetchUser();
   }, [token]);

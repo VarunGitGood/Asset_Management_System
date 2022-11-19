@@ -18,7 +18,6 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../context/authContext";
 
 
-
 function Copyright(props) {
   return (
     <Typography
@@ -32,6 +31,8 @@ function Copyright(props) {
   );
 }
 
+
+
 const theme = createTheme();
 
 export default function SignIn(props) {
@@ -43,13 +44,13 @@ export default function SignIn(props) {
       const result = await postData("/auth/login", false, null, data);
       auth.login(result.data.token);
     } catch (err) {
-      window.alert("bhosdike")
+      props.onErr();
     }
   };
-
   const { register, handleSubmit } = useForm();
-
+  
   return (
+    <>
     <div>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
@@ -124,5 +125,6 @@ export default function SignIn(props) {
         </Container>
       </ThemeProvider>
     </div>
+    </>
   );
 }

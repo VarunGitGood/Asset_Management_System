@@ -58,22 +58,25 @@ export default function Table() {
   return (
     <div className={TableStyles.layout}>
       <SideBar />
-      <div className={TableStyles.control}>
-        <h1>{title}</h1>
-        {flag && <Button variant="contained">Add New Asset</Button>}
-      </div>
-      <div className={TableStyles.container}>
-        {Asst.map((asst) => {
-          return (
-            <AssetCard
-              key={asst.asset_id}
-              asset={asst}
-              onDelete={deleteHandler}
-              onRepair={repairHandler}
-              onCount={countHandler}
-            />
-          );
-        })}
+      <div className={TableStyles.table}>
+
+        <div className={TableStyles.control}>
+          <h1>{title}</h1>
+          {flag && <button variant="contained">Add New Asset</button>}
+        </div>
+        <div className={TableStyles.container}>
+          {Asst.map((asst) => {
+            return (
+              <AssetCard
+                key={asst.asset_id}
+                asset={asst}
+                onDelete={deleteHandler}
+                onRepair={repairHandler}
+                onCount={countHandler}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -50,3 +50,4 @@ CREATE TABLE `repairs` (
   `repair_cost` int NOT NULL,
   `repair_staff_id` int NOT NULL
 )
+

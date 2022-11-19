@@ -21,9 +21,8 @@ export default function RecentBody(props) {
     <div>
         <div className={RecentBodyStyles.body}>
             <div className={RecentBodyStyles.b}>{name}</div>
-            <div className={RecentBodyStyles.b}>{props.log.asset_id}</div>
             <div className={RecentBodyStyles.b}>{date}</div>
-            <div className={RecentBodyStyles.b}>{props.log.log_description}</div>
+            <div className={RecentBodyStyles.be}>{props.log.log_description}</div>
         </div>
     </div>
   )

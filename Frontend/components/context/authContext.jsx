@@ -33,15 +33,19 @@ export default function AuthProvider({ children }) {
     setToken("");
     setUser(null);
   }
-  console.log(user);
+  console.log(token);
+
   useEffect(() => {
     fetchUser();
   }, [token]);
 
+  useEffect(()=> {
+    setToken(window.localStorage.getItem('token'))
+  },[])
+
   const ctx = {
-    user: user,
+    user,
     login,
-    loggedin: window.localStorage.getItem("token") ? true : false,
     logout,
     fetchUser,
     token

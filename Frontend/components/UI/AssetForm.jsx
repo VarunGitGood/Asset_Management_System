@@ -16,12 +16,26 @@ import { FetchData, postData } from "../utils/REST";
 import { Button } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
+import fs from "../style/Form.module.css"
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function AssetForm() {
+export default function AssetForm(props) {
   const { register, handleSubmit } = useForm();
   const [rooms, setRooms] = React.useState([]);
   const auth = useContext(AuthContext);
-
+  function onError() {
+    toast.error('Invalid Entries', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
   const fetchRooms = async () => {
     try {
       const res = await FetchData("/rooms");
@@ -40,10 +54,16 @@ export default function AssetForm() {
       data["is_computer"] = data["is_computer"] ? 1 : 0;
       console.log(data);
       const result = await postData("/assets", false, null, data);
+      props.geta();
+      props.onClose();
+      
       console.log(result);
+
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
+      onError();
     }
+
   };
 
   React.useEffect(() => {
@@ -131,6 +151,7 @@ export default function AssetForm() {
           Submit
         </Button>
       </form>
+      <ToastContainer />
     </div>
   );
 }

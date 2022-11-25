@@ -22,3 +22,18 @@
     flex-wrap: wrap;
     width: 100%;
 }
+.rin
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+    
+}
+.rno
+{
+    color: #4E56A9;
+    font-size: 1.5rem;
+    margin: 0.2rem;
+}

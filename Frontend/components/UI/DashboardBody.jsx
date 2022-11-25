@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import DashBoardbodyStyles from "../style/DashboardBody.module.css";
 import Recent from "./Recent";
 import StatCard from "./StatCard";
 import { FetchData } from "../utils/REST";
 import ChartCard from "./ChartCard";
+import { AuthContext } from "../context/authContext";
 export default function DashboardBody() {
   const [count, setCount] = React.useState({
     assets: 0,
@@ -17,10 +18,12 @@ export default function DashboardBody() {
     { title: "Computer", id: "computers", count: count.computers },
     { title: "repairs", id: "repassets", count: count.repassets },
   ];
-
+  const auth = useContext(AuthContext);
+  const token = auth.token;
+  console.log(token);
   const fetch = async () => {
     try {
-      const res1 = await FetchData("/assets");
+      const res1 = await FetchData("/assets",true,window.localStorage.getItem('token'));
       const res2 = await FetchData("/misc");
       const res3 = await FetchData("/computers");
       const res4 = await FetchData("/repassets");
@@ -31,7 +34,7 @@ export default function DashboardBody() {
         repassets: res4.data.data.length,
       });
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 

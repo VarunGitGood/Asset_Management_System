@@ -8,8 +8,8 @@ const {
     getAllStaff,getStaffById,getStaffActivity
 } = require('../controllers/staffControllers');
 
-routes.route('/api/v1/staff').get(protect, getAllStaff)
-routes.route('/api/v1/staffid').post(protect, getStaffById)
-routes.route('/api/v1/staffactivity').post(protect, getStaffActivity);
+routes.route('/api/v1/staff').get( getAllStaff)
+routes.route('/api/v1/staffid').post(protect,  getStaffById)
+routes.route('/api/v1/staffactivity').post( getStaffActivity);
 
 module.exports = routes

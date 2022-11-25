@@ -36,7 +36,6 @@ function Landing() {
       <div className="bg bg3"></div>
       <div className="bg bg2"></div>
       <div className="content">
-        // loggedin = user
         {auth.user ? (<Navigate to="/dashboard" replace/>) : (flag ? <Login onFlag={flagHandler} onErr={onError}/> : <Register onFlag={flagHandler}/>)}
       </div>
       <ToastContainer />

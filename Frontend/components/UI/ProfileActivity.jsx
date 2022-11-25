@@ -12,7 +12,7 @@ export default function ProfileActivity() {
     const fetch = async () => {
       try {
         const res = await FetchData(`/staffactivity/${id}`);
-        setLog(res.data);
+        setLog(res.data.data);
         console.log(res);
       } catch (error) {
         console.log(error);
@@ -26,14 +26,15 @@ export default function ProfileActivity() {
   return (
     <div className={pa.card}>
         <div className={pa.head}><h1 className={pa.hh}>Activity Status</h1></div>
+        <div className={pa.body}>
         {log.map((item) => (
           <div className={pa.log}>
-            <div className={pa.log1}>
-              <h1 className={pa.h1}>{item.activity}</h1>
-              <h1 className={pa.h2}>{item.date}</h1>
-          </div>
+          
+              <p className={pa.l}>{item.log_description}</p>
+                <span className={pa.l}>{item.log_date.slice(0,10)}</span>
           </div>
         ))}
+        </div>
     </div>
   )
 }

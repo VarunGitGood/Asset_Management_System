@@ -49,7 +49,7 @@ exports.getStaffById = async (req, res, next) => {
 exports.getStaffActivity = async (req, res, next) => {
     try {
         const id = req.params.id;
-        let query = "SELECT * FROM master_staff INNER JOIN activity ON master_staff.staff_id = activity.staff_id WHERE master_staff.staff_id = ?";
+        let query = "SELECT * FROM master_staff INNER JOIN activity_log ON master_staff.staff_id = activity_log.staff_id WHERE master_staff.staff_id = ?";
         connection.query(query, [id], (err, results) => {
         if (err) {
             return next(new ErrorResponse(err.message));

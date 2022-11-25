@@ -10,6 +10,6 @@ const {
 
 routes.route('/api/v1/staff').get( getAllStaff)
 routes.route('/api/v1/staffid').post(protect,  getStaffById)
-routes.route('/api/v1/staffactivity').post( getStaffActivity);
+routes.route('/api/v1/staffactivity/:id').post( getStaffActivity);
 
 module.exports = routes

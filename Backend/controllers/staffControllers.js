@@ -45,10 +45,9 @@ exports.getStaffById = async (req, res, next) => {
 
 // @GET
 // gets all activity performed by staff with given staff id using join
-
 exports.getStaffActivity = async (req, res, next) => {
     try {
-        const {id} = req.body;
+        const id = req.params.id;
         let query = "SELECT * FROM master_staff INNER JOIN activity ON master_staff.staff_id = activity.staff_id WHERE master_staff.staff_id = ?";
         connection.query(query, [id], (err, results) => {
         if (err) {

@@ -5,8 +5,11 @@ import { Button } from "@material-ui/core";
 import { useEffect } from "react";
 import { FetchData, postData, deleteData } from "../utils/REST";
 import RoomCard from "./RoomCard";
+import { useForm } from "react-hook-form";
+
 
 function Rooms() {
+  const { handleSubmit, register } = useForm();
   const [rooms, setRooms] = React.useState([]);
   const fetchRooms = async () => {
     try {
@@ -16,7 +19,6 @@ function Rooms() {
       console.log(error.message);
     }
   };
-  console.log(rooms);
   const deleteRoom = async (id) => {
     try {
       console.log(id);
@@ -27,18 +29,18 @@ function Rooms() {
     }
   };
 
-  const addRoom = async () => {
+  const addRoom = async (data) => {
     try {
-      const res = await postData("/rooms",false,null,{room_id:rooms.length+1});
+      const res = await postData("/rooms",false,null,{room_id:data});
       fetchRooms();
     } catch (error) {
       console.log(error.message);
     }
   }
 
-  function handleSumbit(e) {
-    e.preventDefault();
-    addRoom();
+  function handleSumbit(data) {
+    console.log(data);
+    addRoom(data.room_id);
   }
 
   useEffect(() => {
@@ -51,9 +53,8 @@ function Rooms() {
         <div className={s.nav}>
           <h1>Rooms</h1>
           <div className={s.rin}>
-          <form onSubmit={handleSumbit}>
-          <input className={s.rno} type="text" placeholder="Enter Room No." />
-         
+          <form onSubmit={handleSubmit(handleSumbit)}>
+          <input className={s.rno} type="text" placeholder="Enter Room Id" {...register("room_id")}/>
             <Button type="sumbit" variant="contained" color="primary" >
               Add new Room
             </Button>

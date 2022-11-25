@@ -63,6 +63,23 @@ exports.getStaffActivity = async (req, res, next) => {
     }
 }
 
+exports.getid = async (req, res, next) => {
+    try {
+        const {token} = req.body;
+        let query = "SELECT * FROM master_staff WHERE staff_id = ?";
+        connection.query(query, [token], (err, results) => {
+        if (err) {
+            return next(new ErrorResponse(err.message));
+        }
+        res.status(200).json({
+            success: true,
+            data: results,
+        });
+        });
+    } catch (error) {
+        next(new ErrorResponse(error.message));
+    }
+}
 
 
 

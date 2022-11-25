@@ -15,7 +15,6 @@ export default function AuthProvider({ children }) {
       const body = {
         token: id
       };
-      console.log(id);
       const resu = await postData("/staffid", true, id, body);
       setUser(resu.data);
     } catch (error) {
@@ -33,7 +32,7 @@ export default function AuthProvider({ children }) {
     setToken("");
     setUser(null);
   }
-  console.log(token);
+
 
   useEffect(() => {
     fetchUser();

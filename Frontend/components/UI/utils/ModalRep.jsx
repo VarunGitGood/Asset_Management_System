@@ -1,8 +1,8 @@
 import React from 'react'
 import s from "../../style/OrderModal.module.css";
-import AssetForm from '../AssetForm';
+import RepairForm from '../AssetForm';
 
-function ModalAsset(props) {
+function ModalRep(props) {
     // form ke liye
     function closeHandler() {
         props.onClose();
@@ -10,10 +10,10 @@ function ModalAsset(props) {
   return (
     <div className={s.back}>
       <div className={s.container}>
-        <AssetForm onClose={closeHandler} geta={props.getA}/>
+        <RepairForm onClose={closeHandler} geta={props.getA}/>
       </div>
     </div>
   )
 }
 
-export default ModalAsset
+export default ModalRep

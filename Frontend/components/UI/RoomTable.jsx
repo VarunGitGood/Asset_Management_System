@@ -14,7 +14,7 @@ function RoomTable() {
   const auth= React.useContext(AuthContext);
   const fetchAssets = async () => {
     try {
-      const res = await FetchData(`/rooms/${id}`, true, auth.token);
+      const res = await FetchData(`/rooms/${id}`);
       setRoom(res.data.data);
     } catch (error) {
       console.log(error.message);

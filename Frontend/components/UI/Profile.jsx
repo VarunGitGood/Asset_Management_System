@@ -5,7 +5,11 @@ import ProfileCard from "./ProfileCard";
 import AssetForm from "./AssetForm";
 import RepairForm from "./RepairForm";
 import ProfileActivity from "./ProfileActivity";
+
+
 function Profile() {
+
+  
   return (
     <div className={s.main}>
       <SideBar />

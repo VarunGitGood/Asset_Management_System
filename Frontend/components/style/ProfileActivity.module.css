@@ -6,12 +6,18 @@
     display: flex;
     flex-direction: column;
     margin: 1rem;
-    padding: 1rem;
     width: 100%;
     height: 100%;
+    color: #fff;
 }
 .head
 {
     color: #fff;
     background-color: #4E56A9;
+
+}
+.hh
+{
+    color: #fff;
+    padding: 5px;
 }

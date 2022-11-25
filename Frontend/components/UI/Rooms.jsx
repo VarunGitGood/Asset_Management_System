@@ -36,6 +36,11 @@ function Rooms() {
     }
   }
 
+  function handleSumbit(e) {
+    e.preventDefault();
+    addRoom();
+  }
+
   useEffect(() => {
     fetchRooms();
   }, []);
@@ -45,13 +50,15 @@ function Rooms() {
       <div className={s.main}>
         <div className={s.nav}>
           <h1>Rooms</h1>
-          <div>
-            <Button variant="contained" color="primary" onClick={() => {
-                addRoom()
-            }}>
+          <div className={s.rin}>
+          <form onSubmit={handleSumbit}>
+          <input className={s.rno} type="text" placeholder="Enter Room No." />
+         
+            <Button type="sumbit" variant="contained" color="primary" >
               Add new Room
             </Button>
-          </div>
+            </form>
+            </div>
         </div>
         <div className={s.cards}>
             {(rooms.map((room) => {

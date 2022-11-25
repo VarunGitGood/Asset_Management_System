@@ -367,7 +367,6 @@ exports.updateRepair = async (req, res, next) => {
 
 // @POST
 // increase count by amount in body of asset using id
-
 exports.increaseCount = async (req, res, next) => {
   try {
     let { asset_id, amount } = req.body;
@@ -390,7 +389,6 @@ exports.increaseCount = async (req, res, next) => {
 
 // @POST
 // decrease count by amount in body of asset using id
-
 exports.decreaseCount = async (req, res, next) => {
   try {
     let asset_id = req.params.id;

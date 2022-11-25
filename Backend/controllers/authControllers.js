@@ -26,6 +26,7 @@ exports.signIn = async (req, res, next) => {
       }
     );
   } catch (error) {
+    console.log(error);
     next(new ErrorResponse(error.message));
   }
 };
@@ -35,7 +36,6 @@ exports.signIn = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     let { email, password } = req.body;
-    console.log(email, password);
     let query = "SELECT * FROM master_staff WHERE staff_email = ?";
     connection.query(query, [email], async (err, results) => {
       if (results[0] == undefined) {

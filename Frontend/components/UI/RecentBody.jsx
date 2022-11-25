@@ -8,7 +8,7 @@ export default function RecentBody(props) {
   const date = props.log.log_date.slice(0,10)
   const fetchStaff = async (id) => {
     try {
-      const result = await postData("/staffid",false,null,{id:id})
+      const result = await postData("/staffidrandom",false,null,{token:id})
       setName(result.data.data[0].staff_name)
     } catch (error) {
       console.log(error.message);

@@ -5,13 +5,11 @@ import { FetchData } from "../utils/REST";
 import AssetCard from "./AssetCard";
 import SideBar from "./SideBar";
 import s from "../style/Rooms.module.css";
-import  AuthContext  from  "../context/AuthContext" ;
 
 
 function RoomTable() {
   const { id } = useParams();
   const [room, setRoom] = React.useState([]);
-  const auth= React.useContext(AuthContext);
   const fetchAssets = async () => {
     try {
       const res = await FetchData(`/rooms/${id}`);

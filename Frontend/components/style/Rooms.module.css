@@ -35,5 +35,21 @@
 {
     color: #4E56A9;
     font-size: 1.5rem;
-    margin: 0.2rem;
+    padding: 0;
+    margin-right: 0.5rem;
+    
+}
+
+form {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    color: #4E56A9;
+    all: unset;
+    border: solid 1px black;
+    width: 250px;
 }

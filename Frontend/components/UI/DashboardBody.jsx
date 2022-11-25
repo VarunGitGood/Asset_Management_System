@@ -18,12 +18,10 @@ export default function DashboardBody() {
     { title: "Computer", id: "computers", count: count.computers },
     { title: "repairs", id: "repassets", count: count.repassets },
   ];
-  const auth = useContext(AuthContext);
-  const token = auth.token;
-  console.log(token);
+
   const fetch = async () => {
     try {
-      const res1 = await FetchData("/assets",true,window.localStorage.getItem('token'));
+      const res1 = await FetchData("/assets");
       const res2 = await FetchData("/misc");
       const res3 = await FetchData("/computers");
       const res4 = await FetchData("/repassets");

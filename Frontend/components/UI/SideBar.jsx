@@ -14,7 +14,7 @@ export default function SideBar() {
             nav("/dashboard");
           }}
         >
-          <h1>ASM</h1>
+          <h1 className={SideBarStyles.asm}>ASM</h1>
         </div>
         <div
           className={SideBarStyles.card}
@@ -41,7 +41,8 @@ export default function SideBar() {
           Repairs
         </div>
 
-        <Logout />
+      
+          <Logout />
       </div>
     </>
   );

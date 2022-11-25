@@ -5,17 +5,28 @@ import { useParams } from "react-router-dom";
 import { FetchData, postData, putData } from "../utils/REST";
 import SideBar from "./SideBar";
 import { Button } from "@mui/material";
+import ModalAsset from "./utils/ModalAsset";
 
 export default function Table() {
   /// ###change this to secure###
+
   const token = window.localStorage.getItem("token");
   const { id } = useParams();
   const [Asst, setAsst] = React.useState([]);
   const title = id[0].toUpperCase() + id.slice(1);
   let flag = false;
-  let formFlag = false;
+  const [modal, setModal] = React.useState(false);
+  function openModal()
+  {
+    setModal(true);
+  }
   if (id == "assets") {
     flag = true;
+  }
+
+  function closeHandler()
+  {
+    setModal(false);
   }
   async function getAsst() {
     try {
@@ -59,10 +70,10 @@ export default function Table() {
     <div className={TableStyles.layout}>
       <SideBar />
       <div className={TableStyles.table}>
-
+        {(modal)?<ModalAsset onClose={closeHandler} getA={getAsst}/>:null}
         <div className={TableStyles.control}>
           <h1>{title}</h1>
-          {flag && <button variant="contained">Add New Asset</button>}
+          {flag && <button onClick={openModal} variant="contained">Add New Asset</button>}
         </div>
         <div className={TableStyles.container}>
           {Asst.map((asst) => {

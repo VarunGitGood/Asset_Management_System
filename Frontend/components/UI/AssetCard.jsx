@@ -67,7 +67,7 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
         <p>Date: {asset.purchase_date.slice(0,10)}</p>
       </div>
       <div>
-        Count: {count}
+        Count: {asset.count}
         <input
           type="number"
           min={1}
@@ -87,7 +87,7 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
         </button>
         <button
           onClick={() => {
-            add(value);
+            add(value); 
           }}
         >
           +

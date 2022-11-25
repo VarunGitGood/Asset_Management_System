@@ -14,6 +14,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { postData } from "../../utils/REST";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../context/authContext";
+import { useContext } from "react";
 
 function Copyright(props) {
   return (
@@ -31,12 +33,12 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register(props) {
+    const auth = useContext(AuthContext)
     const submitHandler = async (data) => {
-        event.preventDefault();
-        console.log(data);
         try {
+          console.log(data);
           const result = await postData("/auth/signup", false, null, data);
-          console.log(result.data);
+          auth.login(result.data.token);
         } catch (err) {
             console.log(err.message);
         }
@@ -66,7 +68,6 @@ export default function Register(props) {
               <Box
                 component="form"
                 onSubmit={handleSubmit(submitHandler)}
-                noValidate
                 sx={{ mt: 1 }}
               >
                 <TextField

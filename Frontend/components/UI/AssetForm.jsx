@@ -52,6 +52,7 @@ export default function AssetForm(props) {
       data["purchase_date"] = date;
       data = { ...data, last_updated_staff_id: auth.user.data[0].staff_id };
       data["is_computer"] = data["is_computer"] ? 1 : 0;
+      data = {...data, count:0}
       console.log(data);
       const result = await postData("/assets", false, null, data);
       props.geta();

@@ -143,6 +143,7 @@ exports.deleteAsset = async (req, res, next) => {
           if (err) {
             return next(new ErrorResponse(err.message));
           }
+          console.log(result);
         }
       );
       res.status(200).json({
@@ -412,3 +413,25 @@ exports.decreaseCount = async (req, res, next) => {
     next(new ErrorResponse(error.message, 400));
   }
 }
+
+// @ GET
+// get the total sum of all cost in assets master
+exports.getTotalCost = async (req, res, next) => {
+  try {
+    let query = "SELECT SUM(purchase_cost) FROM assets_master";
+    connection.query(query, (err, results) => {
+      if (err) {
+        next(new ErrorResponse(err.message));
+      }
+      res.status(200).json({
+        success: true,
+        message: "Total Cost fetched!",
+        data: results,
+      });
+    }
+    );
+  } catch (error) {
+    next(new ErrorResponse(error.message, 404));
+  }
+}
+

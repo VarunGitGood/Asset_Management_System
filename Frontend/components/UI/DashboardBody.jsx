@@ -4,7 +4,7 @@ import Recent from "./Recent";
 import StatCard from "./StatCard";
 import { FetchData } from "../utils/REST";
 import ChartCard from "./ChartCard";
-import { AuthContext } from "../context/authContext";
+
 export default function DashboardBody() {
   const [count, setCount] = React.useState({
     assets: 0,

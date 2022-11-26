@@ -22,6 +22,7 @@ export default function AuthProvider({ children }) {
     }
   };
 
+
   const login = async (data) => {
     window.localStorage.setItem("token",data)
     setToken(data);
@@ -38,9 +39,6 @@ export default function AuthProvider({ children }) {
     fetchUser();
   }, [token]);
 
-  useEffect(()=> {
-    setToken(window.localStorage.getItem('token'))
-  },[])
 
   const ctx = {
     user,

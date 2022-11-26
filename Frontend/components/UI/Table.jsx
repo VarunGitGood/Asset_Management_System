@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import AssetCard from "./AssetCard";
 import TableStyles from "../style/Table.module.css";
 import { useParams } from "react-router-dom";
 import { FetchData, postData, putData } from "../utils/REST";
 import SideBar from "./SideBar";
-import { Button } from "@mui/material";
 import ModalAsset from "./utils/ModalAsset";
+import { AuthContext } from "../context/authContext";
 
 export default function Table() {
   /// ###change this to secure###
-
-  const token = window.localStorage.getItem("token");
+  const auth = useContext(AuthContext);
+  const staff = auth.user.data[0].staff_id;
   const { id } = useParams();
   const [Asst, setAsst] = React.useState([]);
   const title = id[0].toUpperCase() + id.slice(1);
@@ -31,7 +31,6 @@ export default function Table() {
   async function getAsst() {
     try {
       const resu = await FetchData(`/${id}`);
-      console.log(resu.data.data);
       setAsst(resu.data.data);
     } catch (error) {
       console.log(error);
@@ -41,9 +40,8 @@ export default function Table() {
   const deleteHandler = async (id) => {
     try {
       const result = await postData(`/assets/${id}`, false, null, {
-        staff_id: token,
+        staff_id: staff
       });
-      console.log(result);
       getAsst();
     } catch (error) {
       console.log(error);

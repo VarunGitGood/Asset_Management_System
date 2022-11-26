@@ -17,9 +17,8 @@ const {
   updateRepair,
   increaseCount,
   decreaseCount,
+  getTotalCost,
 } = require("../controllers/tableControllers");
-
-const { protect } = require("../middleware/protect");
 
 router
   .get("/api/v1/assets", getAllAssets)
@@ -37,6 +36,7 @@ router
   .put("/api/v1/repassets", sendRepair)
   .put("/api/v1/update/:id", updateRepair)
   .post("/api/v1/inc/:id", increaseCount)
-  .post("/api/v1/dec/:id", decreaseCount);
+  .post("/api/v1/dec/:id", decreaseCount)
+  .get("/api/v1/cost", getTotalCost);
 
 module.exports = router;

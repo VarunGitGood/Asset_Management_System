@@ -4,9 +4,12 @@ import { postData } from "../utils/REST";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import AlertDialogSlide from "./utils/Alert";
+
 
 export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
   const [value, setvalue] = useState(asset.count);
+  const [alert, setAlert] = useState(false);
   let count = asset.count;
 
   const add = async (amt) => {
@@ -35,8 +38,16 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
     }
   };
 
+  const closeHandler = (data) => {
+    if(data){
+      onDelete(asset.asset_id);
+    }
+    setAlert(false);
+  }
+
   return (
     <div className={CardStyles.card}>
+      {alert && <AlertDialogSlide close={closeHandler}/>}
       <div className={CardStyles.control}>
         <div className={CardStyles.title}>{asset.comp_name}</div>
         <div className={CardStyles.bb}>
@@ -49,7 +60,7 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
           </button>
           <button
             onClick={() => {
-              onDelete(asset.asset_id);
+              setAlert(!alert);
             }}
           >
             <FontAwesomeIcon icon={faTrash} />

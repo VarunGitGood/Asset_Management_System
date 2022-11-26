@@ -78,7 +78,7 @@ export default function AssetForm(props) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(submitHandler)}>
+      <form onSubmit={handleSubmit(submitHandler)} className={fs.content}>
         <TextField
           margin="normal"
           required

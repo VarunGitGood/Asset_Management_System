@@ -3,8 +3,7 @@ import s from "../../style/OrderModal.module.css";
 import AssetForm from '../AssetForm';
 
 function ModalAsset(props) {
-    // form ke liye
-    function closeHandler() {
+function closeHandler() {
         props.onClose();
     }
   return (

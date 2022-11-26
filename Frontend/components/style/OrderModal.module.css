@@ -23,5 +23,8 @@
     display: flex;
     flex-direction: column;
     color: #353535;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
 }
 

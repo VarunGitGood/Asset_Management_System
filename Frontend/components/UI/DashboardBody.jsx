@@ -38,12 +38,12 @@ export default function DashboardBody() {
 
   const chartData = [
     {
-      label: "Miscellaneous",
-      value: count.misc,
-    },
-    {
       label: "Computers",
       value: count.computers,
+    },
+    {
+      label: "Misc",
+      value: count.misc,
     },
     {
       label: "Repairs",

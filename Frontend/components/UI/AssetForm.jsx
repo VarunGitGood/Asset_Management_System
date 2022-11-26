@@ -90,6 +90,7 @@ export default function AssetForm(props) {
           autoFocus
           {...register("comp_name")}
         />
+        <br></br>
         <TextField
           margin="normal"
           required
@@ -141,6 +142,7 @@ export default function AssetForm(props) {
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
+        <br></br>
         <FormControlLabel
           defaultValue={false}
           control={<Checkbox />}
@@ -148,9 +150,15 @@ export default function AssetForm(props) {
           labelPlacement="end"
           {...register("is_computer")}
         />
+        <br></br>
+        <div className={fs.b}>
+        <Button onClick={props.onClose} variant="contained" color="secondary">
+          Cancel
+        </Button>
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
+        </div>
       </form>
       <ToastContainer />
     </div>

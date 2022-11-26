@@ -21,3 +21,24 @@
     color: #fff;
     padding: 5px;
 }
+.log
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 13px;
+}
+
+.l
+{
+    font-size: large;
+    color: black;
+}
+.body
+{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    overflow-y: scroll;
+    height: 82vh;
+}

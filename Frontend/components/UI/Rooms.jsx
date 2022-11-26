@@ -53,7 +53,7 @@ function Rooms() {
         <div className={s.nav}>
           <h1>Rooms</h1>
           <div className={s.rin}>
-          <form onSubmit={handleSubmit(handleSumbit)}>
+          <form className={s.form} onSubmit={handleSubmit(handleSumbit)}>
           <input className={s.rno} type="text" placeholder="Enter Room Id" {...register("room_id")}/>
             <Button type="sumbit" variant="contained" color="primary" >
               Add new Room

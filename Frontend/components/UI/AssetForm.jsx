@@ -84,7 +84,7 @@ export default function AssetForm(props) {
           required
           fullWidth
           id="comp_name"
-          label="Computer Name"
+          label="Company Name"
           name="comp_name"
           autoComplete="comp_name"
           autoFocus

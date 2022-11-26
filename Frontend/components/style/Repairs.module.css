@@ -1,11 +1,13 @@
 .main {
     width: 85%;
+    margin: 0 auto;
 }
 
 .layout {
     display: flex;
     flex-direction: row;
 }
+
 
 .control {
     width: 100%;
@@ -14,4 +16,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+
+
+
+
+.main1
+{
+    padding: 10px;
+}
+
+.hh
+{
+    margin: 1rem;
+}
+
+.done
+{
+    width: 295px;
+    
+}
+.cb
+{
+    margin: 1rem;
 }

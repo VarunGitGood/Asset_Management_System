@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { FetchData } from "../utils/REST";
 import AssetCard from "./AssetCard";
 import SideBar from "./SideBar";
-import s from "../style/Rooms.module.css";
+import st from "../style/RoomTable.module.css";
 
 
 function RoomTable() {
@@ -23,9 +23,9 @@ function RoomTable() {
     fetchAssets();
   }, []);
   return (
-    <div className={s.layout}>
+    <div className={st.layout}>
       <SideBar />
-      <div className={s.main}>
+      <div className={st.main}>
         {room.map((asset) => {
           return <AssetCard key={asset.asset_id} asset={asset} />;
         })}

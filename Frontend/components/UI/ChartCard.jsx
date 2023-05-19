@@ -1,8 +1,26 @@
 import React from "react";
 import ChartStyles from "../style/ChartCard.module.css";
 import DonutChart from "react-donut-chart";
+import { FetchData } from "../utils/REST";
+import { useEffect } from "react";
+import { AuthContext } from "../context/authContext";
 
 export default function ChartCard({chartData}) {
+  const [cost,setCost]=React.useState(0);
+
+   const fetchCost=async()=>{
+      try {
+        const res=await FetchData(`/cost`);
+        setCost(res.data.data[0].cost);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    useEffect(() => {
+      fetchCost();
+    }, []);
+
   return (
     <div className={ChartStyles.card}>
       <DonutChart
@@ -28,6 +46,7 @@ export default function ChartCard({chartData}) {
           },
         ]}
       />
+      <h2>Total Asset Costs: {cost}</h2>
     </div>
   );
 }

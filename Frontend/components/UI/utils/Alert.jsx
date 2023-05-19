@@ -15,7 +15,7 @@ export default function AlertDialogSlide(props) {
 
   const handleClose = (data) => {
     props.close(data);
-    setOpen(false);
+    // setOpen(false);
   };
 
 

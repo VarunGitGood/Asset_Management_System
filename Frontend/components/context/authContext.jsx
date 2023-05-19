@@ -52,6 +52,6 @@ export default function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={ctx}>
       {children}
-    </AuthContext.Provider>
+    </AuthContext.Provider>  
   );
 }

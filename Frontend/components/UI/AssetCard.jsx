@@ -58,7 +58,7 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
               onRepair(asset.asset_id);
               toast.success('Asset sent for repair!', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

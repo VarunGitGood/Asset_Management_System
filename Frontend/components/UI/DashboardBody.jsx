@@ -16,7 +16,7 @@ export default function DashboardBody() {
     { title: "Assets", id: "assets", count: count.assets },
     { title: "Misc", id: "misc", count: count.misc },
     { title: "Computer", id: "computers", count: count.computers },
-    { title: "repairs", id: "repassets", count: count.repassets },
+    { title: "Repairs", id: "repassets", count: count.repassets },
   ];
 
   const fetch = async () => {

@@ -59,6 +59,7 @@ export default function Register(props) {
                 alignItems: "center",
               }}
             >
+              <h1>Asset Management System</h1>
               <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
                 <LockOutlinedIcon />
               </Avatar>

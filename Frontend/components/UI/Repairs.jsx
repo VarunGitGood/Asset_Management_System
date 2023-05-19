@@ -36,15 +36,12 @@ function Repairs() {
       <SideBar />
       <div className={s.main1}>
       <h1 className={s.hh}>Repairs</h1>
-      {/* <div className={s.control}>
-          <div className={s.remove}>li</div>
-        </div> */}
       <div className={s.main}>
-        {repairs && repairs.map((repair) => {
+        {repairs ? repairs.map((repair) => {
           return <div className={s.cb}><RepairCard key={repair.asset_id} asset={repair} /><button className={s.done} onClick={() => {
             updateRepair(repair.asset_id);
-          }}>Repair Done</button></div>;
-        })}
+          }}>Repair Done</button></div>
+        }): <div>No Assets in Repair</div> }
       </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 node_modules
 config.env
-connection.js
 
 # Logs
 logs

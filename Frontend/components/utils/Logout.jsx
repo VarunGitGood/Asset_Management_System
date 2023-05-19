@@ -12,6 +12,7 @@ function Logout() {
         nav("/");
     }
   return (
+
     <Button className={lgs.b} variant="contained" color="primary" onClick={handleClick}>Logout</Button>
   )
 }

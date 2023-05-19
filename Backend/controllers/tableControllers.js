@@ -418,7 +418,7 @@ exports.decreaseCount = async (req, res, next) => {
 // get the total sum of all cost in assets master
 exports.getTotalCost = async (req, res, next) => {
   try {
-    let query = "SELECT SUM(purchase_cost) FROM assets_master";
+    let query = "SELECT SUM(purchase_cost*count) AS cost FROM assets_master";
     connection.query(query, (err, results) => {
       if (err) {
         next(new ErrorResponse(err.message));

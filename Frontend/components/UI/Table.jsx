@@ -12,6 +12,7 @@ export default function Table() {
   const auth = useContext(AuthContext);
   const staff = auth.user.data[0].staff_id;
   const { id } = useParams();
+  console.log(staff);
   const [Asst, setAsst] = React.useState([]);
   const title = id[0].toUpperCase() + id.slice(1);
   let flag = false;

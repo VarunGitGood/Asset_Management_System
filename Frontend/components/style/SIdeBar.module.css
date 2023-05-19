@@ -1,7 +1,9 @@
 .sidebar
 {
+    width: 100%;
     background-color: white;
     min-height: 100vh;
+    /* width: 250px; */
     width: 15%;
     display: flex;
     z-index: 1;

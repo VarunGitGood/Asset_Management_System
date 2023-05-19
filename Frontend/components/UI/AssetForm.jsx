@@ -57,7 +57,16 @@ export default function AssetForm(props) {
       const result = await postData("/assets", false, null, data);
       props.geta();
       props.onClose();
-      
+      toast.success('Asset created!', {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       console.log(result);
 
     } catch (err) {
@@ -84,7 +93,7 @@ export default function AssetForm(props) {
           required
           fullWidth
           id="comp_name"
-          label="Computer Name"
+          label="Company Name"
           name="comp_name"
           autoComplete="comp_name"
           autoFocus

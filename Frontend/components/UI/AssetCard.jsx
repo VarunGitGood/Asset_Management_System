@@ -4,6 +4,8 @@ import { postData } from "../utils/REST";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AlertDialogSlide from "./utils/Alert";
 
 
@@ -54,6 +56,16 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
           <button
             onClick={() => {
               onRepair(asset.asset_id);
+              toast.success('Asset sent for repair!', {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
             }}
           >
             <FontAwesomeIcon icon={faUpRightFromSquare} />
@@ -104,6 +116,7 @@ export default function AssetCard({ asset, onDelete, onRepair, onCount }) {
           +
         </button>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

@@ -12,12 +12,13 @@ export default function ProfileActivity() {
   const fetch = async () => {
     try {
       const res = await FetchData(`/staffactivity/${id}`);
-      setLog(res.data.data);
+      setLog(res.data.data.reverse());
     } catch (error) {
       console.log(error);
     }
   };
 
+  
   React.useEffect(() => {
     fetch();
   }, []);

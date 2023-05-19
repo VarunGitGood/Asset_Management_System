@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { FetchData, postData, deleteData } from "../utils/REST";
 import RoomCard from "./RoomCard";
 import { useForm } from "react-hook-form";
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Rooms() {
@@ -26,6 +28,16 @@ function Rooms() {
       fetchRooms();
     } catch (error) {
       console.log(error.message);
+      toast.error('Room contains assets', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
@@ -35,12 +47,23 @@ function Rooms() {
       fetchRooms();
     } catch (error) {
       console.log(error.message);
+      toast.error('Room already exists', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   }
 
   function handleSumbit(data) {
     console.log(data);
     addRoom(data.room_id);
+    fetchRooms();
   }
 
   useEffect(() => {
@@ -68,6 +91,7 @@ function Rooms() {
           
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }
